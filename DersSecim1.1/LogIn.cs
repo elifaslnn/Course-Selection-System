@@ -17,16 +17,15 @@ namespace DersSecim1._1
         public string userType;
 
         ogrenciPage ogrenciPage= new ogrenciPage();
+        public ogrenciPanel ogrenciPanel = new ogrenciPanel();
+
         public LogIn()
         {
             InitializeComponent();
         }
 
         public NpgsqlConnection conn= new NpgsqlConnection("server=localhost; port=5432; Database=dbDersSecim ; Username =postgres; Password=123 ");
-        private void label1_Click(object sender, EventArgs e)
-        {
-        }
-  
+ 
 
         private void yöneticiGiriş_Load(object sender, EventArgs e)
         {
@@ -70,9 +69,9 @@ namespace DersSecim1._1
                 MessageBox.Show("kullanıcı girişi başarılı");
                 if (userType == "ogrenci")
                 {
-                    ogrenciPage.ogrenciId = int.Parse(ds.Tables[0].Rows[0][0].ToString());
+                    ogrenciPanel.ogrenciId = int.Parse(ds.Tables[0].Rows[0][0].ToString());
                     this.Hide();
-                    ogrenciPage.Show();
+                    ogrenciPanel.Show();
                 }
                 
             }
@@ -86,6 +85,18 @@ namespace DersSecim1._1
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void textBox1_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = string.Empty;
+            textBox1.ForeColor = Color.White;
+        }
+
+        private void textBox2_Click(object sender, EventArgs e)
+        {
+            textBox2.Text = string.Empty;
+            textBox2.ForeColor = Color.White;
         }
     }
 }

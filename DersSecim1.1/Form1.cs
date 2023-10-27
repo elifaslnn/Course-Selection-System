@@ -20,7 +20,6 @@ namespace DersSecim1._1
         }
 
         public LogIn girisEkrani = new LogIn();
-
         private void button1_Click(object sender, EventArgs e)
         {
             girisEkrani.userType = "yonetici";

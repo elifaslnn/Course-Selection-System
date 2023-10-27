@@ -32,8 +32,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.talep = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -62,45 +61,31 @@
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Location = new System.Drawing.Point(681, 129);
+            this.panel1.Location = new System.Drawing.Point(655, 106);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(621, 639);
+            this.panel1.Size = new System.Drawing.Size(637, 639);
             this.panel1.TabIndex = 2;
             // 
             // panel2
             // 
             this.panel2.AutoScroll = true;
             this.panel2.BackColor = System.Drawing.Color.RosyBrown;
-            this.panel2.Controls.Add(this.comboBox2);
-            this.panel2.Controls.Add(this.comboBox1);
+            this.panel2.Controls.Add(this.talep);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(647, 75);
+            this.panel2.Location = new System.Drawing.Point(527, 23);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(684, 658);
+            this.panel2.Size = new System.Drawing.Size(858, 639);
             this.panel2.TabIndex = 3;
             // 
-            // comboBox2
+            // talep
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "yapay zeka",
-            "gömülü sistemler",
-            "bilgisayar mimarisi"});
-            this.comboBox2.Location = new System.Drawing.Point(259, 19);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(184, 24);
-            this.comboBox2.TabIndex = 2;
-            this.comboBox2.Text = "İlgi Alanına göre Filtrele";
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(465, 19);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(184, 24);
-            this.comboBox1.TabIndex = 1;
-            this.comboBox1.Text = "Hocaya Göre Filtrele";
+            this.talep.Location = new System.Drawing.Point(741, 575);
+            this.talep.Name = "talep";
+            this.talep.Size = new System.Drawing.Size(95, 41);
+            this.talep.TabIndex = 1;
+            this.talep.Text = "talep";
+            this.talep.UseVisualStyleBackColor = true;
+            this.talep.Click += new System.EventHandler(this.talep_Click);
             // 
             // label1
             // 
@@ -124,6 +109,7 @@
             this.Name = "ogrenciPage";
             this.Text = "ogrenciPage";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.ogrenciPage_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -136,8 +122,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button talep;
     }
 }

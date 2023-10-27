@@ -16,8 +16,12 @@ namespace DersSecim1._1
     {
         public int ogrenciId;
         query queries = new query();
-        List<ComboBox> comboBoxes = new List<ComboBox>();
         List<Label> courses = new List<Label>();
+        List<List<string>> teachersAllName = new List<List<string>>();//öğrencinin alabileceği tüm derslerin hocalarının adını tutar
+        List<List<int>> teachersAllId = new List<List<int>>();//öğrencinin alabileceği tüm derslerin hocalarının idsini tutar
+        List<int> studentsCoursesIdcanTake = new List<int>();
+        List<string> studentsCoursesNamecanTake = new List<string>();
+
 
         public ogrenciPage()
         {
@@ -26,6 +30,63 @@ namespace DersSecim1._1
             panel2.Visible = false;
 
         }
+
+        private void ogrenciPage_Load(object sender, EventArgs e)
+        {
+            studentsCoursesIdcanTake = queries.getCoursesIdTheSutendCanTake(ogrenciId);//öğrencinin alması gereken derslerin idsi
+            foreach (int id in studentsCoursesIdcanTake)//her bir id ye göre öğretmen idsi ve adını tut
+            {
+                List<string> teachersNameforCourse = new List<string>();
+                List<int> teachersIdforCourse = new List<int>();
+                teachersNameforCourse = queries.getTeachersNameForCourseId(id);
+                teachersIdforCourse = queries.getTeachersIdForCourseId(id);
+                teachersAllName.Add(teachersNameforCourse);
+                teachersAllId.Add(teachersIdforCourse);
+                studentsCoursesNamecanTake.Add(queries.getNameofCoursesId(id));
+
+            }
+        }
+
+
+        List<List<CheckBox>> checkBoxes = new List<List<CheckBox>>();
+        public void createCheckBoxesforTeachers()
+        {
+            int y = 50;
+            for(int i = 0; i < teachersAllId.Count; i++)
+            {
+                int x = 120;
+                List<CheckBox> cbox = new List<CheckBox>();
+                for (int j = 0; j < teachersAllId[i].Count; j++)
+                {
+                    cbox.Add(new CheckBox() { Text = teachersAllName[i][j], Location = new System.Drawing.Point(x, y) });
+                    x += 120;
+                }
+                checkBoxes.Add(cbox);
+                y += 40;
+            }
+            for (int i = 0; i < teachersAllId.Count; i++)
+            {
+                for (int j = 0; j < teachersAllId[i].Count; j++)
+                {
+                    panel2.Controls.Add(checkBoxes[i][j]);
+                }
+            }
+        }
+
+        public void createLabelforCourses()//derslerin yazdığı label
+        {
+            int y = 50;
+            foreach(var courseName in studentsCoursesNamecanTake)
+            {
+                courses.Add(new Label() { Text = courseName, Location = new System.Drawing.Point(10, y) });
+                y += 40;
+            }
+            foreach(var course in courses)
+            {
+                panel2.Controls.Add(course);
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e) //aldığı dersleri ve notları gösteren buton  
         {
             int y = 60;
@@ -44,72 +105,40 @@ namespace DersSecim1._1
             }
         }
 
+        private void button2_Click(object sender, EventArgs e)   //alabileceği tüm dersler
 
-        private void button2_Click(object sender, EventArgs e)  //alabileceği tüm dersler
         {
             panel2.Visible = true;
             panel1.Visible = false;
-            int y = 60;
 
-            List<int> coursesIdTheStudentCanTake = new List<int>();//alabileceği derslerin idsi
-            List<string> teachersName = new List<string>();//alabileceği derslerin hocaları
-            coursesIdTheStudentCanTake = queries.getCoursesIdTheSutendCanTake(ogrenciId);//öğrencinin alabileceği derslerin idsi
-
-            for (int i = 0; i < comboBoxes.Count; i++)
-            {
-                panel2.Controls.Remove(comboBoxes[i]);
-                comboBoxes[i].Items.Clear();
-            }
-
-            for (int i = 0; i < coursesIdTheStudentCanTake.Count; i++)
-            {
-                ComboBox combo = new ComboBox();
-                comboBoxes.Add(combo);
-
-                Label course = new Label();
-                // courses.Add(course);
-
-                panel2.Controls.Add(new Button() { Text = "Talep", Location = new System.Drawing.Point(180, y), BackColor=Color.Green });
-
-                panel2.Controls.Add(comboBoxes[i]);
-                panel2.Controls.Add(course);
-                comboBoxes[i].Location = new System.Drawing.Point(90, y);
-                course.Text = queries.getNameofCoursesId(coursesIdTheStudentCanTake[i]);
-                course.Location = new System.Drawing.Point(10, y);
-                teachersName = queries.getTeachersNameForClassId(coursesIdTheStudentCanTake[i]);//a dersinin hocaları // b dersinin hocaları
-
-                for (int j = 0; j < teachersName.Count; j++)
-                {
-                    comboBoxes[i].Items.Add(teachersName[j]);
-                }
-                y += 40;
-            }
-
+            createCheckBoxesforTeachers();
+            createLabelforCourses();
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void talep_Click(object sender, EventArgs e) //talep ettiği derslerin tabloya kayıdı
         {
-            List<int> teachersId = new List<int>();
-            string interest = comboBox2.Text;
-
-            teachersId =queries.getTeacherIdforInterest(interest);
-
-            for (int i = 0; i < comboBoxes.Count; i++)
+            int id = queries.getLastIdFromTable("talepogrenci")+1;
+            int teacherId;
+            int courseId;
+            bool check=false;
+            for(int i=0;i<checkBoxes.Count;i++)
             {
-                panel2.Controls.Remove(comboBoxes[i]);
-                panel2.Controls.Remove(courses[i]);
-                comboBoxes[i].Items.Clear();
+                for(int j = 0; j < checkBoxes[i].Count; j++)
+                {
+                    teacherId = teachersAllId[i][j];
+                    courseId = studentsCoursesIdcanTake[i];
+                    check = queries.checkRequest(ogrenciId, teacherId, courseId);
+                    if (check==true && checkBoxes[i][j].Checked)
+                    {
+                        queries.setRequestCourse(id,ogrenciId,teacherId,courseId);
+                        id++;
+                    }
+
+                } 
             }
-            int y = 60;
-
-            for (int i = 0; i < teachersId.Count; i++)
+            if (check == false)
             {
-                ComboBox combo = new ComboBox();
-                comboBoxes.Add(combo);
-                panel2.Controls.Add(comboBoxes[i]);
-                comboBoxes[i].Text = queries.getTeacherNameForTeachId(teachersId[i]);
-                comboBoxes[i].Location = new System.Drawing.Point(120, y);
-                y += 40;
+                MessageBox.Show("bu ders ve seçili hoca için tekrar talep oluşturamazsınız");
             }
         }
 
