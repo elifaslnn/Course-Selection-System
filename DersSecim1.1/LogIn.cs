@@ -17,6 +17,7 @@ namespace DersSecim1._1
         public string userType;
 
         public ogrenciPanel ogrenciPanel = new ogrenciPanel();
+        public teachPage teachPage = new teachPage();
 
         public LogIn()
         {
@@ -65,12 +66,17 @@ namespace DersSecim1._1
             }
             else if (ds.Tables[0].Rows.Count != 0)
             {
-                MessageBox.Show("kullanıcı girişi başarılı");
+                this.Hide();
+
                 if (userType == "ogrenci")
                 {
                     ogrenciPanel.ogrenciId = int.Parse(ds.Tables[0].Rows[0][0].ToString());
-                    this.Hide();
                     ogrenciPanel.Show();
+                }
+                else if (userType == "hoca")
+                {
+                    teachPage.teachId= int.Parse(ds.Tables[0].Rows[0][0].ToString());
+                    teachPage.Show();
                 }
                 
             }

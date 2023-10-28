@@ -181,26 +181,30 @@ namespace DersSecim1._1
         List<Button> deleteRequestBtn = new List<Button>();
 
         //talep oluşturduğu derslerin bilgisini gösteren panel
+
+        List<List<int>> coursesRequested = new List<List<int>>();
+
         private void requestCourses()
         {
-            List<List<int>> courses= new List<List<int>>();
-            courses = queries.getCurrentCoursesIdRequest(ogrenciId);
+            coursesRequested = queries.getCurrentCoursesIdRequest(ogrenciId);
             int y = 80;
-            for(int i = 0; i < courses.Count; i++)
+            for(int i = 0; i < coursesRequested.Count; i++)
             {
-                string coursesName = queries.getNameofCoursesId(courses[i][0]);
-                string teacherName = queries.getTeacherNameForTeachId(courses[i][1]);  
+                string coursesName = queries.getNameofCoursesId(coursesRequested[i][0]);
+                string teacherName = queries.getTeacherNameForTeachId(coursesRequested[i][1]);  
                 requestCourseNames.Add(new Label() { Text = coursesName, Location= new System.Drawing.Point(10, y) });
                 requestCoursesTeacher.Add(new Label() { Text = teacherName, Location = new System.Drawing.Point(120, y) });
                 deleteRequestBtn.Add(new Button() {Text="Sil", Location = new System.Drawing.Point(230, y) , BackColor=Color.Red, ForeColor=Color.White});
                 y += 40;
             }
 
-            for(int i=0;i<courses.Count; i++) {
+            for (int i=0;i< coursesRequested.Count; i++) {
                 panel6.Controls.Add(requestCourseNames[i]);
                 panel6.Controls.Add(requestCoursesTeacher[i]);
+                deleteRequestBtn[i].Click += new System.EventHandler(deleteRequest);
                 panel6.Controls.Add(deleteRequestBtn[i]);
             }
+
         }
 
         //aldığı derslerin bilgisi gösteren panel
@@ -216,7 +220,7 @@ namespace DersSecim1._1
 
         private void courseRequestBtn_Click(object sender, EventArgs e)
         {
-            removeControls();
+            //removeControls();
             infoCourses.Visible = false;
             selectCoursesPanel.Visible = true;
             createCheckBoxesforTeachers();
@@ -240,11 +244,18 @@ namespace DersSecim1._1
                     courseSelection.Controls.Remove(messagesBtn[i][j]);
                 }
             }
-            checkBoxes.Clear();
             for(int i=0;i< courses.Count;i++)
             {
                 courseSelection.Controls.Remove(courses[i]);
             }
+            for(int i = 0; i < coursesRequested.Count; i++)
+            {
+                panel6.Controls.Remove(requestCourseNames[i]);
+                panel6.Controls.Remove(requestCoursesTeacher[i]);
+                panel6.Controls.Remove(deleteRequestBtn[i]);
+            }
+
+            checkBoxes.Clear();
             courses.Clear();
             messagesBtn.Clear();
             teachersAllName.Clear();
@@ -253,9 +264,6 @@ namespace DersSecim1._1
             requestCourseNames.Clear();
             requestCoursesTeacher.Clear();
             deleteRequestBtn.Clear();
-
-            label7.Text = checkBoxes.Count.ToString();
-            label8.Text=courses.Count.ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -278,10 +286,8 @@ namespace DersSecim1._1
                     }
                 }
             }
-            /*removeControls();
-            requestPanel();*/
-            courseSelection.Refresh();
-
+            removeControls();
+            requestPanel();
         }
 
         private void messageBtn_Click(object sender, EventArgs e)
@@ -326,6 +332,15 @@ namespace DersSecim1._1
             messagePanel.Visible = false;
         }
 
+        private void deleteRequest(object sender,EventArgs e)
+        {
+            Button button = (Button)sender;
+            int index = deleteRequestBtn.IndexOf(button);
+            int id = queries.getLastIdFromTable("hocayamesaj") + 1;
+            queries.deleteRequest(ogrenciId, coursesRequested[index][0], coursesRequested[index][1]);
+            removeControls();
+            requestPanel();
+        }
 
     }
 }

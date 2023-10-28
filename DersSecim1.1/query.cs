@@ -319,9 +319,8 @@ namespace DersSecim1._1
             da.Fill(ds);
 
             List<string> names= new List<string>();
-            names.Add(ds.Tables[0].Rows[0][0].ToString());
-            names.Add(ds.Tables[0].Rows[0][1].ToString());
-
+            string nameSurname = ds.Tables[0].Rows[0][0].ToString() + " " + ds.Tables[0].Rows[0][1].ToString();
+            names.Add(nameSurname);
             return names;
         }
 
@@ -338,6 +337,53 @@ namespace DersSecim1._1
             conn.Close();
         }
 
+        public void deleteRequest( int studentid, int courseId,int teachId)
+        {
+            conn.Close();
+            conn.Open();
+            NpgsqlCommand komut = new NpgsqlCommand("Delete from talepogrenci where ogrenciid= @p2 and dersid=@p3 and hocaid= @p4", conn);
+            komut.Parameters.AddWithValue("@p2", studentid);
+            komut.Parameters.AddWithValue("@p3", courseId);
+            komut.Parameters.AddWithValue("@p4", teachId);
+            komut.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public List<List<int>> showRequestToTeach(int teacherId)
+        {
+            string sorgu = "select ogrenciid, dersid from talepogrenci where hocaid="+teacherId+"";
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            List<List<int>> requestInfo = new List<List<int>>();
+
+            for(int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                List<int> info = new List<int>();
+                info.Add(int.Parse(ds.Tables[0].Rows[i][0].ToString()));
+                info.Add(int.Parse(ds.Tables[0].Rows[i][1].ToString()));
+                requestInfo.Add(info);
+            }
+
+            return requestInfo;
+        }
+
+
+
+        public void acceptStudentsRequest(int id,int courseId, int studentId, string situation)
+        {
+            conn.Close();
+            conn.Open();
+            NpgsqlCommand komut = new NpgsqlCommand("insert into ogrenciders (id, dersid,ogrenciid,durum) values (@p1, @p2,@p3,@p4)", conn);
+            komut.Parameters.AddWithValue("@p1", id);
+            komut.Parameters.AddWithValue("@p2", courseId);
+            komut.Parameters.AddWithValue("@p3",studentId );
+            komut.Parameters.AddWithValue("@p4", situation);
+
+            komut.ExecuteNonQuery();
+            conn.Close();
+        }
 
 
 

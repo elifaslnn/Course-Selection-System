@@ -43,28 +43,28 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.selectCoursesPanel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.courseSelection = new System.Windows.Forms.Panel();
-            this.messagePanel = new System.Windows.Forms.Panel();
-            this.sendMsjBtn = new System.Windows.Forms.Button();
-            this.messageTextBox = new System.Windows.Forms.TextBox();
-            this.messageToLabel = new System.Windows.Forms.Label();
-            this.messageFromLabel = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.courseSelection = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.messagePanel = new System.Windows.Forms.Panel();
             this.ExitMsjBtn = new System.Windows.Forms.Button();
+            this.sendMsjBtn = new System.Windows.Forms.Button();
+            this.messageTextBox = new System.Windows.Forms.TextBox();
+            this.messageToLabel = new System.Windows.Forms.Label();
+            this.messageFromLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
             this.infoCourses.SuspendLayout();
             this.selectCoursesPanel.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.courseSelection.SuspendLayout();
             this.messagePanel.SuspendLayout();
-            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -213,94 +213,13 @@
             // 
             this.selectCoursesPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.selectCoursesPanel.BackColor = System.Drawing.Color.RosyBrown;
+            this.selectCoursesPanel.Controls.Add(this.panel6);
             this.selectCoursesPanel.Controls.Add(this.button1);
             this.selectCoursesPanel.Controls.Add(this.courseSelection);
-            this.selectCoursesPanel.Controls.Add(this.panel6);
             this.selectCoursesPanel.Location = new System.Drawing.Point(176, 177);
             this.selectCoursesPanel.Name = "selectCoursesPanel";
             this.selectCoursesPanel.Size = new System.Drawing.Size(1124, 711);
             this.selectCoursesPanel.TabIndex = 3;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(399, 638);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // courseSelection
-            // 
-            this.courseSelection.AutoScroll = true;
-            this.courseSelection.BackColor = System.Drawing.Color.White;
-            this.courseSelection.Controls.Add(this.messagePanel);
-            this.courseSelection.Controls.Add(this.label5);
-            this.courseSelection.Location = new System.Drawing.Point(0, 0);
-            this.courseSelection.Name = "courseSelection";
-            this.courseSelection.Size = new System.Drawing.Size(654, 632);
-            this.courseSelection.TabIndex = 0;
-            // 
-            // messagePanel
-            // 
-            this.messagePanel.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.messagePanel.Controls.Add(this.ExitMsjBtn);
-            this.messagePanel.Controls.Add(this.sendMsjBtn);
-            this.messagePanel.Controls.Add(this.messageTextBox);
-            this.messagePanel.Controls.Add(this.messageToLabel);
-            this.messagePanel.Controls.Add(this.messageFromLabel);
-            this.messagePanel.Location = new System.Drawing.Point(81, 155);
-            this.messagePanel.Name = "messagePanel";
-            this.messagePanel.Size = new System.Drawing.Size(504, 338);
-            this.messagePanel.TabIndex = 4;
-            // 
-            // sendMsjBtn
-            // 
-            this.sendMsjBtn.BackColor = System.Drawing.Color.LimeGreen;
-            this.sendMsjBtn.Location = new System.Drawing.Point(358, 291);
-            this.sendMsjBtn.Name = "sendMsjBtn";
-            this.sendMsjBtn.Size = new System.Drawing.Size(109, 34);
-            this.sendMsjBtn.TabIndex = 3;
-            this.sendMsjBtn.Text = "Gönder";
-            this.sendMsjBtn.UseVisualStyleBackColor = false;
-            this.sendMsjBtn.Click += new System.EventHandler(this.sendMsjBtn_Click);
-            // 
-            // messageTextBox
-            // 
-            this.messageTextBox.Location = new System.Drawing.Point(23, 81);
-            this.messageTextBox.Multiline = true;
-            this.messageTextBox.Name = "messageTextBox";
-            this.messageTextBox.Size = new System.Drawing.Size(444, 204);
-            this.messageTextBox.TabIndex = 2;
-            // 
-            // messageToLabel
-            // 
-            this.messageToLabel.AccessibleDescription = "";
-            this.messageToLabel.AutoSize = true;
-            this.messageToLabel.Location = new System.Drawing.Point(20, 50);
-            this.messageToLabel.Name = "messageToLabel";
-            this.messageToLabel.Size = new System.Drawing.Size(35, 16);
-            this.messageToLabel.TabIndex = 1;
-            this.messageToLabel.Text = "Alıcı:";
-            // 
-            // messageFromLabel
-            // 
-            this.messageFromLabel.AutoSize = true;
-            this.messageFromLabel.Location = new System.Drawing.Point(20, 18);
-            this.messageFromLabel.Name = "messageFromLabel";
-            this.messageFromLabel.Size = new System.Drawing.Size(70, 16);
-            this.messageFromLabel.TabIndex = 0;
-            this.messageFromLabel.Text = "Gönderen:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 10);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 16);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Talep Oluştur";
             // 
             // panel6
             // 
@@ -350,6 +269,49 @@
             this.panel7.Size = new System.Drawing.Size(542, 630);
             this.panel7.TabIndex = 1;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(399, 638);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // courseSelection
+            // 
+            this.courseSelection.AutoScroll = true;
+            this.courseSelection.BackColor = System.Drawing.Color.White;
+            this.courseSelection.Controls.Add(this.label5);
+            this.courseSelection.Controls.Add(this.messagePanel);
+            this.courseSelection.Location = new System.Drawing.Point(0, 0);
+            this.courseSelection.Name = "courseSelection";
+            this.courseSelection.Size = new System.Drawing.Size(654, 632);
+            this.courseSelection.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(13, 10);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(87, 16);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Talep Oluştur";
+            // 
+            // messagePanel
+            // 
+            this.messagePanel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.messagePanel.Controls.Add(this.ExitMsjBtn);
+            this.messagePanel.Controls.Add(this.sendMsjBtn);
+            this.messagePanel.Controls.Add(this.messageTextBox);
+            this.messagePanel.Controls.Add(this.messageToLabel);
+            this.messagePanel.Controls.Add(this.messageFromLabel);
+            this.messagePanel.Location = new System.Drawing.Point(81, 155);
+            this.messagePanel.Name = "messagePanel";
+            this.messagePanel.Size = new System.Drawing.Size(504, 338);
+            this.messagePanel.TabIndex = 4;
+            // 
             // ExitMsjBtn
             // 
             this.ExitMsjBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
@@ -361,6 +323,44 @@
             this.ExitMsjBtn.Text = "X";
             this.ExitMsjBtn.UseVisualStyleBackColor = false;
             this.ExitMsjBtn.Click += new System.EventHandler(this.ExitMsjBtn_Click);
+            // 
+            // sendMsjBtn
+            // 
+            this.sendMsjBtn.BackColor = System.Drawing.Color.LimeGreen;
+            this.sendMsjBtn.Location = new System.Drawing.Point(358, 291);
+            this.sendMsjBtn.Name = "sendMsjBtn";
+            this.sendMsjBtn.Size = new System.Drawing.Size(109, 34);
+            this.sendMsjBtn.TabIndex = 3;
+            this.sendMsjBtn.Text = "Gönder";
+            this.sendMsjBtn.UseVisualStyleBackColor = false;
+            this.sendMsjBtn.Click += new System.EventHandler(this.sendMsjBtn_Click);
+            // 
+            // messageTextBox
+            // 
+            this.messageTextBox.Location = new System.Drawing.Point(23, 81);
+            this.messageTextBox.Multiline = true;
+            this.messageTextBox.Name = "messageTextBox";
+            this.messageTextBox.Size = new System.Drawing.Size(444, 204);
+            this.messageTextBox.TabIndex = 2;
+            // 
+            // messageToLabel
+            // 
+            this.messageToLabel.AccessibleDescription = "";
+            this.messageToLabel.AutoSize = true;
+            this.messageToLabel.Location = new System.Drawing.Point(20, 50);
+            this.messageToLabel.Name = "messageToLabel";
+            this.messageToLabel.Size = new System.Drawing.Size(35, 16);
+            this.messageToLabel.TabIndex = 1;
+            this.messageToLabel.Text = "Alıcı:";
+            // 
+            // messageFromLabel
+            // 
+            this.messageFromLabel.AutoSize = true;
+            this.messageFromLabel.Location = new System.Drawing.Point(20, 18);
+            this.messageFromLabel.Name = "messageFromLabel";
+            this.messageFromLabel.Size = new System.Drawing.Size(70, 16);
+            this.messageFromLabel.TabIndex = 0;
+            this.messageFromLabel.Text = "Gönderen:";
             // 
             // ogrenciPanel
             // 
@@ -383,12 +383,12 @@
             this.infoCourses.ResumeLayout(false);
             this.infoCourses.PerformLayout();
             this.selectCoursesPanel.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.courseSelection.ResumeLayout(false);
             this.courseSelection.PerformLayout();
             this.messagePanel.ResumeLayout(false);
             this.messagePanel.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -410,18 +410,18 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel selectCoursesPanel;
         private System.Windows.Forms.Panel courseSelection;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel messagePanel;
         private System.Windows.Forms.Label messageToLabel;
         private System.Windows.Forms.Label messageFromLabel;
         private System.Windows.Forms.Button sendMsjBtn;
         private System.Windows.Forms.TextBox messageTextBox;
         private System.Windows.Forms.Button ExitMsjBtn;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Panel panel7;
     }
 }
