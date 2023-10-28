@@ -101,12 +101,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ogrenciPage.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ogrenciPage.Designer.cs">
-      <DependentUpon>ogrenciPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="ogrenciPanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,9 +124,6 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ogrenciPage.resx">
-      <DependentUpon>ogrenciPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ogrenciPanel.resx">
       <DependentUpon>ogrenciPanel.cs</DependentUpon>

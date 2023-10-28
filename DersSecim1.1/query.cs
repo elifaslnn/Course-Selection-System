@@ -312,5 +312,34 @@ namespace DersSecim1._1
             return courses;
         }
 
+        public List<string> getNameSurname(int studentid) {
+            string sorgu = "select ad, soyad from ogrenci where id="+studentid+"";
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            List<string> names= new List<string>();
+            names.Add(ds.Tables[0].Rows[0][0].ToString());
+            names.Add(ds.Tables[0].Rows[0][1].ToString());
+
+            return names;
+        }
+
+        public void setMessage(int id, int studentId, int teacherId, string messsage,string tableName)
+        {
+            conn.Close();
+            conn.Open();
+            NpgsqlCommand komut = new NpgsqlCommand("insert into "+tableName+" (id, ogrenciid,hocaid,mesaj) values (@p1, @p2,@p3,@p4)", conn);
+            komut.Parameters.AddWithValue("@p1", id);
+            komut.Parameters.AddWithValue("@p2", studentId);
+            komut.Parameters.AddWithValue("@p3", teacherId);
+            komut.Parameters.AddWithValue("@p4", messsage);
+            komut.ExecuteNonQuery();
+            conn.Close();
+        }
+
+
+
+
     }
 }

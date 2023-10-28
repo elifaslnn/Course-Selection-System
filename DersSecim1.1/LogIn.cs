@@ -16,7 +16,6 @@ namespace DersSecim1._1
     {
         public string userType;
 
-        ogrenciPage ogrenciPage= new ogrenciPage();
         public ogrenciPanel ogrenciPanel = new ogrenciPanel();
 
         public LogIn()

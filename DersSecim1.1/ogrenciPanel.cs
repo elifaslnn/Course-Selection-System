@@ -58,6 +58,7 @@ namespace DersSecim1._1
             //infoOfTakedCourses();
             selectCoursesPanel.Visible = false;
             infoCourses.Visible = false;
+            messagePanel.Visible = false;
         }
 
         List<List<CheckBox>> checkBoxes = new List<List<CheckBox>>();
@@ -82,6 +83,20 @@ namespace DersSecim1._1
                 studentsCoursesNamecanTake.Add(queries.getNameofCoursesId(id));
             }
         }
+
+
+        public class ButtonIndices
+        {
+            public int I { get; }
+            public int J { get; }
+
+            public ButtonIndices(int i, int j)
+            {
+                I = i;
+                J = j;
+            }
+        }
+
         //alabileceği derslerin hocalarını gösteren panel
         public void createCheckBoxesforTeachers()
         {
@@ -98,7 +113,8 @@ namespace DersSecim1._1
                         cbox.Add(new CheckBox() { Text = teachersAllName[i][j], Location = new System.Drawing.Point(x, y), Size = new System.Drawing.Size(90, 30) });
                         x += 90;
                         buttons.Add(new Button() { Text = "**", Location = new System.Drawing.Point(x, y), Size = new System.Drawing.Size(30, 30), BackColor = Color.Green });
-                        x += 40;
+                        
+                    x += 40;
                     }
                     checkBoxes.Add(cbox);
                     messagesBtn.Add(buttons);
@@ -111,8 +127,12 @@ namespace DersSecim1._1
             {
                 for (int j = 0; j < checkBoxes[i].Count; j++)
                 {
+                    //messagesBtn[i][j].Click += (sender, e) => messageBtn_Click(sender, e, i, j);
+                    messagesBtn[i][j].Tag = new ButtonIndices(i, j);
+                    messagesBtn[i][j].Click += new System.EventHandler(messageBtn_Click);
                     courseSelection.Controls.Add(checkBoxes[i][j]);
                     courseSelection.Controls.Add(messagesBtn[i][j]);
+   
                 }
             }
         }
@@ -196,6 +216,7 @@ namespace DersSecim1._1
 
         private void courseRequestBtn_Click(object sender, EventArgs e)
         {
+            removeControls();
             infoCourses.Visible = false;
             selectCoursesPanel.Visible = true;
             createCheckBoxesforTeachers();
@@ -257,17 +278,54 @@ namespace DersSecim1._1
                     }
                 }
             }
-            removeControls();
-            requestPanel();
+            /*removeControls();
+            requestPanel();*/
+            courseSelection.Refresh();
+
         }
 
-        private void deleteRequest()
+        private void messageBtn_Click(object sender, EventArgs e)
         {
+            Button clickedButton = (Button)sender;
+            ButtonIndices buttonIndices = (ButtonIndices)clickedButton.Tag;
+            int i = buttonIndices.I;
+            int j= buttonIndices.J; 
+            messagePanel.Visible = true;
+            List<string> studentNameSurname = new List<string>();
+            studentNameSurname = queries.getNameSurname(ogrenciId);
+            messageFromLabel.Text="Gönderen: "+ studentNameSurname[0] +" " + studentNameSurname[1];
+
+            List<string> teachNameSurname= new List<string>();
+            messageToLabel.Text="Alıcı: "+teachersAllName[i][j];
+            sendMsjBtn.Tag = new ButtonIndices(i, j);
 
         }
-        private void panel6_Paint(object sender, PaintEventArgs e)
+
+        private void sendMsjBtn_Click(object sender, EventArgs e)
         {
-
+            Button clickedButton=(Button)sender;
+            ButtonIndices buttonIndices = (ButtonIndices)clickedButton.Tag;
+            int i = buttonIndices.I;
+            int j= buttonIndices.J;
+            string message=messageTextBox.Text;
+            int id = queries.getLastIdFromTable("hocayamesaj")+1;
+            if (message.Length == 0)
+            {
+                MessageBox.Show("Lütfen Mesajı Giriniz");
+            }
+            else
+            {
+                queries.setMessage(id, ogrenciId, teachersAllId[i][j],message,"hocayamesaj");
+                MessageBox.Show("mesajınız gönderildi!");
+                messagePanel.Visible = false;
+            }
         }
+
+        private void ExitMsjBtn_Click(object sender, EventArgs e)
+        {
+            messagePanel.Visible = false;
+        }
+
+
     }
 }
