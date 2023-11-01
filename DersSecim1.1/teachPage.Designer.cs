@@ -30,26 +30,49 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(teachPage));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.requestedCoursesBtn = new System.Windows.Forms.Button();
-            this.ShowStudentBtn = new System.Windows.Forms.Button();
-            this.filterBtn = new System.Windows.Forms.Button();
-            this.settingBtn = new System.Windows.Forms.Button();
-            this.selectCoursesPanel = new System.Windows.Forms.Panel();
-            this.NameSurname = new System.Windows.Forms.Label();
             this.agno = new System.Windows.Forms.Label();
-            this.qourseNameL = new System.Windows.Forms.Label();
-            this.studentNameL = new System.Windows.Forms.Label();
+            this.NameSurname = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.settingBtn = new System.Windows.Forms.Button();
+            this.filterBtn = new System.Windows.Forms.Button();
+            this.ShowStudentBtn = new System.Windows.Forms.Button();
+            this.requestedCoursesBtn = new System.Windows.Forms.Button();
+            this.approvePanel = new System.Windows.Forms.Panel();
+            this.messagePanel = new System.Windows.Forms.Panel();
+            this.ExitMsjBtn = new System.Windows.Forms.Button();
+            this.sendMsjBtn = new System.Windows.Forms.Button();
+            this.messageTextBox = new System.Windows.Forms.TextBox();
+            this.messageToLabel = new System.Windows.Forms.Label();
+            this.messageFromLabel = new System.Windows.Forms.Label();
             this.infoPanel = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.studentNameL = new System.Windows.Forms.Label();
+            this.qourseNameL = new System.Windows.Forms.Label();
+            this.interestPanel = new System.Windows.Forms.Panel();
+            this.selectInterestPanel = new System.Windows.Forms.Panel();
+            this.Interest = new System.Windows.Forms.Label();
+            this.showInterestPanel = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.approveInterestBtn = new System.Windows.Forms.Button();
+            this.RequestStudent = new System.Windows.Forms.Panel();
+            this.selectCourse = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.selectCoursesPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.approvePanel.SuspendLayout();
+            this.messagePanel.SuspendLayout();
             this.infoPanel.SuspendLayout();
+            this.interestPanel.SuspendLayout();
+            this.selectInterestPanel.SuspendLayout();
+            this.showInterestPanel.SuspendLayout();
+            this.RequestStudent.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -64,7 +87,58 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(338, 909);
             this.panel1.TabIndex = 3;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBox1.ErrorImage = null;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.Location = new System.Drawing.Point(94, 83);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(150, 150);
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
+            // agno
+            // 
+            this.agno.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.agno.AutoSize = true;
+            this.agno.Location = new System.Drawing.Point(131, 278);
+            this.agno.Name = "agno";
+            this.agno.Size = new System.Drawing.Size(44, 16);
+            this.agno.TabIndex = 7;
+            this.agno.Text = "label1";
+            // 
+            // NameSurname
+            // 
+            this.NameSurname.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.NameSurname.AutoSize = true;
+            this.NameSurname.Location = new System.Drawing.Point(130, 256);
+            this.NameSurname.Name = "NameSurname";
+            this.NameSurname.Size = new System.Drawing.Size(44, 16);
+            this.NameSurname.TabIndex = 6;
+            this.NameSurname.Text = "label1";
+            // 
+            // panel3
+            // 
+            this.panel3.AutoScroll = true;
+            this.panel3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 329);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(338, 580);
+            this.panel3.TabIndex = 4;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(1440, 386);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(335, 467);
+            this.dataGridView1.TabIndex = 0;
             // 
             // panel2
             // 
@@ -79,27 +153,34 @@
             this.panel2.Size = new System.Drawing.Size(1437, 128);
             this.panel2.TabIndex = 4;
             // 
-            // panel3
+            // settingBtn
             // 
-            this.panel3.AutoScroll = true;
-            this.panel3.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 329);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(338, 580);
-            this.panel3.TabIndex = 4;
+            this.settingBtn.Location = new System.Drawing.Point(1097, 74);
+            this.settingBtn.Name = "settingBtn";
+            this.settingBtn.Size = new System.Drawing.Size(321, 32);
+            this.settingBtn.TabIndex = 6;
+            this.settingBtn.Text = "Ayarlar";
+            this.settingBtn.UseVisualStyleBackColor = true;
+            this.settingBtn.Click += new System.EventHandler(this.settingBtn_Click);
             // 
-            // pictureBox1
+            // filterBtn
             // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.pictureBox1.ErrorImage = null;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(94, 83);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(150, 150);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
+            this.filterBtn.Location = new System.Drawing.Point(740, 74);
+            this.filterBtn.Name = "filterBtn";
+            this.filterBtn.Size = new System.Drawing.Size(321, 32);
+            this.filterBtn.TabIndex = 5;
+            this.filterBtn.Text = "Filtrele";
+            this.filterBtn.UseVisualStyleBackColor = true;
+            // 
+            // ShowStudentBtn
+            // 
+            this.ShowStudentBtn.Location = new System.Drawing.Point(378, 74);
+            this.ShowStudentBtn.Name = "ShowStudentBtn";
+            this.ShowStudentBtn.Size = new System.Drawing.Size(321, 32);
+            this.ShowStudentBtn.TabIndex = 4;
+            this.ShowStudentBtn.Text = "Talebi Onaylanmayan Öğrenciler";
+            this.ShowStudentBtn.UseVisualStyleBackColor = true;
+            this.ShowStudentBtn.Click += new System.EventHandler(this.ShowStudentBtn_Click);
             // 
             // requestedCoursesBtn
             // 
@@ -111,74 +192,109 @@
             this.requestedCoursesBtn.UseVisualStyleBackColor = true;
             this.requestedCoursesBtn.Click += new System.EventHandler(this.requestedCoursesBtn_Click);
             // 
-            // ShowStudentBtn
+            // approvePanel
             // 
-            this.ShowStudentBtn.Location = new System.Drawing.Point(378, 74);
-            this.ShowStudentBtn.Name = "ShowStudentBtn";
-            this.ShowStudentBtn.Size = new System.Drawing.Size(321, 32);
-            this.ShowStudentBtn.TabIndex = 4;
-            this.ShowStudentBtn.Text = "Talebi Onaylanmayan Öğrenciler";
-            this.ShowStudentBtn.UseVisualStyleBackColor = true;
+            this.approvePanel.BackColor = System.Drawing.Color.White;
+            this.approvePanel.Controls.Add(this.messagePanel);
+            this.approvePanel.Controls.Add(this.infoPanel);
+            this.approvePanel.Controls.Add(this.studentNameL);
+            this.approvePanel.Controls.Add(this.qourseNameL);
+            this.approvePanel.Location = new System.Drawing.Point(206, 166);
+            this.approvePanel.Name = "approvePanel";
+            this.approvePanel.Size = new System.Drawing.Size(1124, 711);
+            this.approvePanel.TabIndex = 5;
             // 
-            // filterBtn
+            // messagePanel
             // 
-            this.filterBtn.Location = new System.Drawing.Point(740, 74);
-            this.filterBtn.Name = "filterBtn";
-            this.filterBtn.Size = new System.Drawing.Size(321, 32);
-            this.filterBtn.TabIndex = 5;
-            this.filterBtn.Text = "Filtrele";
-            this.filterBtn.UseVisualStyleBackColor = true;
+            this.messagePanel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.messagePanel.Controls.Add(this.ExitMsjBtn);
+            this.messagePanel.Controls.Add(this.sendMsjBtn);
+            this.messagePanel.Controls.Add(this.messageTextBox);
+            this.messagePanel.Controls.Add(this.messageToLabel);
+            this.messagePanel.Controls.Add(this.messageFromLabel);
+            this.messagePanel.Location = new System.Drawing.Point(310, 186);
+            this.messagePanel.Name = "messagePanel";
+            this.messagePanel.Size = new System.Drawing.Size(504, 338);
+            this.messagePanel.TabIndex = 5;
             // 
-            // settingBtn
+            // ExitMsjBtn
             // 
-            this.settingBtn.Location = new System.Drawing.Point(1097, 74);
-            this.settingBtn.Name = "settingBtn";
-            this.settingBtn.Size = new System.Drawing.Size(321, 32);
-            this.settingBtn.TabIndex = 6;
-            this.settingBtn.Text = "Ayarlar";
-            this.settingBtn.UseVisualStyleBackColor = true;
+            this.ExitMsjBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.ExitMsjBtn.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.ExitMsjBtn.Location = new System.Drawing.Point(447, 9);
+            this.ExitMsjBtn.Name = "ExitMsjBtn";
+            this.ExitMsjBtn.Size = new System.Drawing.Size(40, 35);
+            this.ExitMsjBtn.TabIndex = 4;
+            this.ExitMsjBtn.Text = "X";
+            this.ExitMsjBtn.UseVisualStyleBackColor = false;
+            this.ExitMsjBtn.Click += new System.EventHandler(this.ExitMsjBtn_Click);
             // 
-            // selectCoursesPanel
+            // sendMsjBtn
             // 
-            this.selectCoursesPanel.BackColor = System.Drawing.Color.White;
-            this.selectCoursesPanel.Controls.Add(this.infoPanel);
-            this.selectCoursesPanel.Controls.Add(this.studentNameL);
-            this.selectCoursesPanel.Controls.Add(this.qourseNameL);
-            this.selectCoursesPanel.Location = new System.Drawing.Point(206, 166);
-            this.selectCoursesPanel.Name = "selectCoursesPanel";
-            this.selectCoursesPanel.Size = new System.Drawing.Size(1124, 711);
-            this.selectCoursesPanel.TabIndex = 5;
+            this.sendMsjBtn.BackColor = System.Drawing.Color.LimeGreen;
+            this.sendMsjBtn.Location = new System.Drawing.Point(358, 291);
+            this.sendMsjBtn.Name = "sendMsjBtn";
+            this.sendMsjBtn.Size = new System.Drawing.Size(109, 34);
+            this.sendMsjBtn.TabIndex = 3;
+            this.sendMsjBtn.Text = "Gönder";
+            this.sendMsjBtn.UseVisualStyleBackColor = false;
+            this.sendMsjBtn.Click += new System.EventHandler(this.sendMsjBtn_Click);
             // 
-            // NameSurname
+            // messageTextBox
             // 
-            this.NameSurname.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.NameSurname.AutoSize = true;
-            this.NameSurname.Location = new System.Drawing.Point(130, 256);
-            this.NameSurname.Name = "NameSurname";
-            this.NameSurname.Size = new System.Drawing.Size(44, 16);
-            this.NameSurname.TabIndex = 6;
-            this.NameSurname.Text = "label1";
+            this.messageTextBox.Location = new System.Drawing.Point(23, 81);
+            this.messageTextBox.Multiline = true;
+            this.messageTextBox.Name = "messageTextBox";
+            this.messageTextBox.Size = new System.Drawing.Size(444, 204);
+            this.messageTextBox.TabIndex = 2;
             // 
-            // agno
+            // messageToLabel
             // 
-            this.agno.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.agno.AutoSize = true;
-            this.agno.Location = new System.Drawing.Point(131, 278);
-            this.agno.Name = "agno";
-            this.agno.Size = new System.Drawing.Size(44, 16);
-            this.agno.TabIndex = 7;
-            this.agno.Text = "label1";
+            this.messageToLabel.AccessibleDescription = "";
+            this.messageToLabel.AutoSize = true;
+            this.messageToLabel.Location = new System.Drawing.Point(20, 50);
+            this.messageToLabel.Name = "messageToLabel";
+            this.messageToLabel.Size = new System.Drawing.Size(35, 16);
+            this.messageToLabel.TabIndex = 1;
+            this.messageToLabel.Text = "Alıcı:";
             // 
-            // qourseNameL
+            // messageFromLabel
             // 
-            this.qourseNameL.AutoSize = true;
-            this.qourseNameL.BackColor = System.Drawing.Color.Gray;
-            this.qourseNameL.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.qourseNameL.Location = new System.Drawing.Point(208, 51);
-            this.qourseNameL.Name = "qourseNameL";
-            this.qourseNameL.Size = new System.Drawing.Size(59, 16);
-            this.qourseNameL.TabIndex = 0;
-            this.qourseNameL.Text = "Ders Adı";
+            this.messageFromLabel.AutoSize = true;
+            this.messageFromLabel.Location = new System.Drawing.Point(20, 18);
+            this.messageFromLabel.Name = "messageFromLabel";
+            this.messageFromLabel.Size = new System.Drawing.Size(70, 16);
+            this.messageFromLabel.TabIndex = 0;
+            this.messageFromLabel.Text = "Gönderen:";
+            // 
+            // infoPanel
+            // 
+            this.infoPanel.AutoScroll = true;
+            this.infoPanel.BackColor = System.Drawing.Color.LightGray;
+            this.infoPanel.Controls.Add(this.label2);
+            this.infoPanel.Controls.Add(this.label1);
+            this.infoPanel.Location = new System.Drawing.Point(586, 0);
+            this.infoPanel.Name = "infoPanel";
+            this.infoPanel.Size = new System.Drawing.Size(538, 711);
+            this.infoPanel.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(210, 51);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(28, 16);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Not";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(59, 51);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 16);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Ders Adı";
             // 
             // studentNameL
             // 
@@ -191,33 +307,111 @@
             this.studentNameL.TabIndex = 2;
             this.studentNameL.Text = "Ogrenci Adı";
             // 
-            // infoPanel
+            // qourseNameL
             // 
-            this.infoPanel.BackColor = System.Drawing.Color.LightGray;
-            this.infoPanel.Controls.Add(this.label2);
-            this.infoPanel.Controls.Add(this.label1);
-            this.infoPanel.Location = new System.Drawing.Point(586, 0);
-            this.infoPanel.Name = "infoPanel";
-            this.infoPanel.Size = new System.Drawing.Size(538, 711);
-            this.infoPanel.TabIndex = 3;
+            this.qourseNameL.AutoSize = true;
+            this.qourseNameL.BackColor = System.Drawing.Color.Gray;
+            this.qourseNameL.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.qourseNameL.Location = new System.Drawing.Point(208, 51);
+            this.qourseNameL.Name = "qourseNameL";
+            this.qourseNameL.Size = new System.Drawing.Size(59, 16);
+            this.qourseNameL.TabIndex = 0;
+            this.qourseNameL.Text = "Ders Adı";
             // 
-            // label1
+            // interestPanel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(59, 51);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 16);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Ders Adı";
+            this.interestPanel.BackColor = System.Drawing.Color.White;
+            this.interestPanel.Controls.Add(this.selectInterestPanel);
+            this.interestPanel.Controls.Add(this.showInterestPanel);
+            this.interestPanel.Controls.Add(this.approveInterestBtn);
+            this.interestPanel.Location = new System.Drawing.Point(203, 166);
+            this.interestPanel.Name = "interestPanel";
+            this.interestPanel.Size = new System.Drawing.Size(1124, 711);
+            this.interestPanel.TabIndex = 6;
             // 
-            // label2
+            // selectInterestPanel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(210, 51);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(28, 16);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Not";
+            this.selectInterestPanel.AutoScroll = true;
+            this.selectInterestPanel.Controls.Add(this.Interest);
+            this.selectInterestPanel.Location = new System.Drawing.Point(3, 3);
+            this.selectInterestPanel.Name = "selectInterestPanel";
+            this.selectInterestPanel.Size = new System.Drawing.Size(612, 640);
+            this.selectInterestPanel.TabIndex = 2;
+            // 
+            // Interest
+            // 
+            this.Interest.AutoSize = true;
+            this.Interest.Location = new System.Drawing.Point(-127, 19);
+            this.Interest.Name = "Interest";
+            this.Interest.Size = new System.Drawing.Size(72, 16);
+            this.Interest.TabIndex = 0;
+            this.Interest.Text = "İlgi Alanları";
+            // 
+            // showInterestPanel
+            // 
+            this.showInterestPanel.BackColor = System.Drawing.Color.DarkGray;
+            this.showInterestPanel.Controls.Add(this.label3);
+            this.showInterestPanel.Location = new System.Drawing.Point(621, 1);
+            this.showInterestPanel.Name = "showInterestPanel";
+            this.showInterestPanel.Size = new System.Drawing.Size(503, 707);
+            this.showInterestPanel.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(19, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(72, 16);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "İlgi Alanları";
+            // 
+            // approveInterestBtn
+            // 
+            this.approveInterestBtn.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.approveInterestBtn.Location = new System.Drawing.Point(474, 649);
+            this.approveInterestBtn.Name = "approveInterestBtn";
+            this.approveInterestBtn.Size = new System.Drawing.Size(141, 47);
+            this.approveInterestBtn.TabIndex = 1;
+            this.approveInterestBtn.Text = "Onayla";
+            this.approveInterestBtn.UseVisualStyleBackColor = false;
+            this.approveInterestBtn.Click += new System.EventHandler(this.approveInterestBtn_Click);
+            // 
+            // RequestStudent
+            // 
+            this.RequestStudent.BackColor = System.Drawing.Color.White;
+            this.RequestStudent.Controls.Add(this.panel4);
+            this.RequestStudent.Controls.Add(this.selectCourse);
+            this.RequestStudent.Controls.Add(this.label5);
+            this.RequestStudent.Location = new System.Drawing.Point(203, 166);
+            this.RequestStudent.Name = "RequestStudent";
+            this.RequestStudent.Size = new System.Drawing.Size(1138, 711);
+            this.RequestStudent.TabIndex = 1;
+            // 
+            // selectCourse
+            // 
+            this.selectCourse.FormattingEnabled = true;
+            this.selectCourse.Location = new System.Drawing.Point(1000, 20);
+            this.selectCourse.Name = "selectCourse";
+            this.selectCourse.Size = new System.Drawing.Size(121, 24);
+            this.selectCourse.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(43, 28);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 16);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Öğrenci Adı";
+            // 
+            // panel4
+            // 
+            this.panel4.AutoScroll = true;
+            this.panel4.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel4.Location = new System.Drawing.Point(46, 90);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1043, 585);
+            this.panel4.TabIndex = 2;
             // 
             // teachPage
             // 
@@ -225,20 +419,34 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(1775, 909);
-            this.Controls.Add(this.selectCoursesPanel);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.RequestStudent);
+            this.Controls.Add(this.interestPanel);
+            this.Controls.Add(this.approvePanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "teachPage";
             this.Text = "teachPage";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.teachPage_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.selectCoursesPanel.ResumeLayout(false);
-            this.selectCoursesPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.approvePanel.ResumeLayout(false);
+            this.approvePanel.PerformLayout();
+            this.messagePanel.ResumeLayout(false);
+            this.messagePanel.PerformLayout();
             this.infoPanel.ResumeLayout(false);
             this.infoPanel.PerformLayout();
+            this.interestPanel.ResumeLayout(false);
+            this.selectInterestPanel.ResumeLayout(false);
+            this.selectInterestPanel.PerformLayout();
+            this.showInterestPanel.ResumeLayout(false);
+            this.showInterestPanel.PerformLayout();
+            this.RequestStudent.ResumeLayout(false);
+            this.RequestStudent.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -253,7 +461,7 @@
         private System.Windows.Forms.Button filterBtn;
         private System.Windows.Forms.Button ShowStudentBtn;
         private System.Windows.Forms.Button requestedCoursesBtn;
-        private System.Windows.Forms.Panel selectCoursesPanel;
+        private System.Windows.Forms.Panel approvePanel;
         private System.Windows.Forms.Label agno;
         private System.Windows.Forms.Label NameSurname;
         private System.Windows.Forms.Panel infoPanel;
@@ -261,5 +469,22 @@
         private System.Windows.Forms.Label qourseNameL;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel messagePanel;
+        private System.Windows.Forms.Button ExitMsjBtn;
+        private System.Windows.Forms.Button sendMsjBtn;
+        private System.Windows.Forms.TextBox messageTextBox;
+        private System.Windows.Forms.Label messageToLabel;
+        private System.Windows.Forms.Label messageFromLabel;
+        private System.Windows.Forms.Panel interestPanel;
+        private System.Windows.Forms.Label Interest;
+        private System.Windows.Forms.Button approveInterestBtn;
+        private System.Windows.Forms.Panel selectInterestPanel;
+        private System.Windows.Forms.Panel showInterestPanel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Panel RequestStudent;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox selectCourse;
+        private System.Windows.Forms.Panel panel4;
     }
 }

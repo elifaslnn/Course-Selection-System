@@ -59,6 +59,7 @@ namespace DersSecim1._1
             selectCoursesPanel.Visible = false;
             infoCourses.Visible = false;
             messagePanel.Visible = false;
+            approvePanel.Visible = false;   
         }
 
         List<List<CheckBox>> checkBoxes = new List<List<CheckBox>>();
@@ -76,8 +77,8 @@ namespace DersSecim1._1
             {
                 List<string> teachersNameforCourse = new List<string>();
                 List<int> teachersIdforCourse = new List<int>();
-                teachersNameforCourse = queries.getTeachersNameCanRequest(id);
-                teachersIdforCourse = queries.getTeachersIdCanRequest(id);
+                teachersNameforCourse = queries.getTeachersNameCanRequest(id,ogrenciId);
+                teachersIdforCourse = queries.getTeachersIdCanRequest(id,ogrenciId);
                 teachersAllName.Add(teachersNameforCourse);
                 teachersAllId.Add(teachersIdforCourse);
                 studentsCoursesNamecanTake.Add(queries.getNameofCoursesId(id));
@@ -210,6 +211,8 @@ namespace DersSecim1._1
         //aldığı derslerin bilgisi gösteren panel
         private void takedCourses_Click(object sender, EventArgs e)
         {
+            approvePanel.Visible = false;
+
             infoCourses.Visible = true;
             selectCoursesPanel.Visible = false;
             infoOfTakedCourses();
@@ -218,14 +221,18 @@ namespace DersSecim1._1
 
         public NpgsqlConnection conn = new NpgsqlConnection("server=localhost; port=5432; Database=dbDersSecim ; Username =postgres; Password=123 ");
 
+        //talep ooluştur
         private void courseRequestBtn_Click(object sender, EventArgs e)
         {
-            //removeControls();
-            infoCourses.Visible = false;
-            selectCoursesPanel.Visible = true;
-            createCheckBoxesforTeachers();
-            createLabelforCourses();
-            requestCourses();
+             removeControls();
+             infoCourses.Visible = false;
+             selectCoursesPanel.Visible = true;
+             approvePanel.Visible = false;   
+             createCheckBoxesforTeachers();
+             createLabelforCourses();
+             requestCourses();
+
+
         }
         private void requestPanel()
         {
@@ -238,23 +245,47 @@ namespace DersSecim1._1
 
         private void removeControls()
         {
-            for(int i=0;i<checkBoxes.Count;i++) {
-                for(int j = 0; j < checkBoxes[i].Count;j++) {
-                    courseSelection.Controls.Remove(checkBoxes[i][j]);
-                    courseSelection.Controls.Remove(messagesBtn[i][j]);
+            if (checkBoxes.Count != 0)
+            {
+                for (int i = 0; i < checkBoxes.Count; i++)
+                {
+                    for (int j = 0; j < checkBoxes[i].Count; j++)
+                    {
+                        courseSelection.Controls.Remove(checkBoxes[i][j]);
+                        courseSelection.Controls.Remove(messagesBtn[i][j]);
+                    }
                 }
             }
-            for(int i=0;i< courses.Count;i++)
+
+            if (courses.Count != 0)
             {
-                courseSelection.Controls.Remove(courses[i]);
-            }
-            for(int i = 0; i < coursesRequested.Count; i++)
-            {
-                panel6.Controls.Remove(requestCourseNames[i]);
-                panel6.Controls.Remove(requestCoursesTeacher[i]);
-                panel6.Controls.Remove(deleteRequestBtn[i]);
+                for (int i = 0; i < courses.Count; i++)
+                {
+                    courseSelection.Controls.Remove(courses[i]);
+                }
             }
 
+
+            if (coursesRequested.Count != 0)
+            {
+                for(int i = 0; i < coursesRequested.Count; i++)
+                {
+                    panel6.Controls.Remove(requestCourseNames[i]);
+                    panel6.Controls.Remove(requestCoursesTeacher[i]);
+                    panel6.Controls.Remove(deleteRequestBtn[i]);
+                }
+            }
+            if(approvedCourses.Count != 0)
+            {
+                for(int i = 0; i < approvedCourses.Count; i++)
+            {
+                    approvePanel.Controls.Remove(approvedCoursesLabel[i]);
+                    approvePanel.Controls.Remove(approvedTeacherLabel[i]);
+                }
+            }
+
+            coursesRequested.Clear();
+            approvedCourses.Clear();
             checkBoxes.Clear();
             courses.Clear();
             messagesBtn.Clear();
@@ -297,9 +328,9 @@ namespace DersSecim1._1
             int i = buttonIndices.I;
             int j= buttonIndices.J; 
             messagePanel.Visible = true;
-            List<string> studentNameSurname = new List<string>();
+            string studentNameSurname;
             studentNameSurname = queries.getNameSurname(ogrenciId);
-            messageFromLabel.Text="Gönderen: "+ studentNameSurname[0] +" " + studentNameSurname[1];
+            messageFromLabel.Text="Gönderen: "+ studentNameSurname;
 
             List<string> teachNameSurname= new List<string>();
             messageToLabel.Text="Alıcı: "+teachersAllName[i][j];
@@ -341,6 +372,35 @@ namespace DersSecim1._1
             removeControls();
             requestPanel();
         }
+
+        List<string> approvedCourses = new List<string>();
+        List<string> approvedTeacher=new List<string>();
+        List<Label> approvedCoursesLabel = new List<Label>();
+        List<Label> approvedTeacherLabel = new List<Label>();
+
+
+        //onaylanan dersleri göster
+
+        private void approveBtn_Click(object sender, EventArgs e)
+        {
+            //removeControls();
+            approvePanel.Visible = true;
+            approvedCourses = queries.approvedCourses(ogrenciId);
+            approvedTeacher=queries.approvedTeacher(ogrenciId);
+            int y = 80;
+            for (int i = 0;i<approvedCourses.Count;i++) {
+                approvedCoursesLabel.Add(new Label(){ Text = approvedCourses[i],Location = new System.Drawing.Point(50, y) });
+                approvedTeacherLabel.Add(new Label() { Text = approvedTeacher[i], Location = new System.Drawing.Point(170, y) });
+                y += 40;
+            }
+            for(int i = 0; i < approvedCoursesLabel.Count; i++)
+            {
+                approvePanel.Controls.Add(approvedCoursesLabel[i]);
+                approvePanel.Controls.Add(approvedTeacherLabel[i]);
+
+            }
+        }
+
 
     }
 }

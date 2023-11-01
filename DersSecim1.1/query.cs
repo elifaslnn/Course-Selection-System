@@ -1,11 +1,13 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Serialization;
 
 namespace DersSecim1._1
@@ -23,7 +25,7 @@ namespace DersSecim1._1
             da.Fill(ds);
 
             List<int> courses = new List<int>();
-
+   
 
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
@@ -33,8 +35,7 @@ namespace DersSecim1._1
         }
         public List<int> getCoursesIdTheSutendCanTakeIfNumberIsOne(int studentId)
         {
-
-            string query = "(select id from ders except select dersid from ogrenciders where ogrenciid=" + studentId + ") except select dersid from talepogrenci";
+            string query = "(select id from ders except select dersid from ogrenciders where ogrenciid=" + studentId + ") except select dersid from talepogrenci where ogrenciid= " + studentId + "";
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, conn);
             DataSet ds = new DataSet();
             da.Fill(ds);
@@ -95,10 +96,10 @@ namespace DersSecim1._1
         }
 
         /// BURSDASINNNNDSFASDFA
-        public List<int> getTeachersIdCanRequest(int courseId)
+        public List<int> getTeachersIdCanRequest(int courseId, int studentId)
         {
             List<int> teachersId= new List<int>();
-            string query = "select hocaid from hocaders where dersid=" + courseId +" except select hocaid from talepogrenci where dersid="+courseId+"";
+            string query = "select hocaid from hocaders where dersid=" + courseId +" except select hocaid from talepogrenci where dersid="+courseId+" and ogrenciid="+studentId+"";
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, conn);
             DataSet ds = new DataSet();
             da.Fill(ds);
@@ -112,10 +113,10 @@ namespace DersSecim1._1
             return teachersId;
         }
 
-        public List<string> getTeachersNameCanRequest(int courseId)
+        public List<string> getTeachersNameCanRequest(int courseId,int studentId)
         {
             List<string> teachersName = new List<string>();
-            string query = "select ad from hoca where id IN(select hocaid from hocaders where dersid=" + courseId + " except select hocaid from talepogrenci where dersid=" + courseId + ")";
+            string query = "select ad from hoca where id IN(select hocaid from hocaders where dersid=" + courseId + " except select hocaid from talepogrenci where dersid=" + courseId + " and ogrenciid="+studentId+")";
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, conn);
             DataSet ds = new DataSet();
             da.Fill(ds);
@@ -264,16 +265,26 @@ namespace DersSecim1._1
 
         public int getLastIdFromTable(string tableName)
         {
-            int number;
-            string query = "select id from "+tableName+"";
+            string query="select id from "+tableName+"";
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, conn);
             DataSet ds = new DataSet();
             da.Fill(ds);
-            int indexCount = ds.Tables[0].Rows.Count;
-            if (indexCount > 0)
-                number = int.Parse(ds.Tables[0].Rows[indexCount - 1][0].ToString());
-            else number = 1;
-            return number;
+
+
+            List<int> ids= new List<int>();
+            for(int i = 0; i < ds.Tables[0].Rows.Count; i++) {
+                ids.Add(int.Parse(ds.Tables[0].Rows[i][0].ToString()));
+            }
+            int max = int.Parse(ds.Tables[0].Rows[0][0].ToString());
+            for(int i = 1; i < ds.Tables[0].Rows.Count; i++)
+            {
+                if (max < int.Parse(ds.Tables[0].Rows[i][0].ToString()))
+                {
+                    max = int.Parse(ds.Tables[0].Rows[i][0].ToString());
+                }
+            }
+            return max;
+
         }
 
         public bool checkRequest(int studentid, int teacherId, int courseId)//örencinin daha önce talep oluşturup oluşturmadığını kontrol et
@@ -312,16 +323,16 @@ namespace DersSecim1._1
             return courses;
         }
 
-        public List<string> getNameSurname(int studentid) {
+        public string getNameSurname(int studentid) {
             string sorgu = "select ad, soyad from ogrenci where id="+studentid+"";
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, conn);
             DataSet ds = new DataSet();
             da.Fill(ds);
 
-            List<string> names= new List<string>();
+            //List<string> names= new List<string>();
             string nameSurname = ds.Tables[0].Rows[0][0].ToString() + " " + ds.Tables[0].Rows[0][1].ToString();
-            names.Add(nameSurname);
-            return names;
+            //names.Add(nameSurname);
+            return nameSurname;
         }
 
         public void setMessage(int id, int studentId, int teacherId, string messsage,string tableName)
@@ -371,20 +382,142 @@ namespace DersSecim1._1
 
 
 
-        public void acceptStudentsRequest(int id,int courseId, int studentId, string situation)
+        public void acceptStudentsRequest(int id,int courseId, int studentId, string situation,int teachId)
         {
             conn.Close();
             conn.Open();
-            NpgsqlCommand komut = new NpgsqlCommand("insert into ogrenciders (id, dersid,ogrenciid,durum) values (@p1, @p2,@p3,@p4)", conn);
+            NpgsqlCommand komut = new NpgsqlCommand("insert into ogrenciders (id, dersid,ogrenciid,durum,hocaid) values (@p1, @p2,@p3,@p4,@p5)", conn);
             komut.Parameters.AddWithValue("@p1", id);
             komut.Parameters.AddWithValue("@p2", courseId);
             komut.Parameters.AddWithValue("@p3",studentId );
             komut.Parameters.AddWithValue("@p4", situation);
-
+            komut.Parameters.AddWithValue("@p5", teachId);
             komut.ExecuteNonQuery();
             conn.Close();
         }
 
+        public List<string> approvedCourses(int ogrenciId)
+        {
+            string sorgu = "select ad from ders where id IN (select dersid from ogrenciders where durum='onaylandi' and ogrenciid=" + ogrenciId + ") ";
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            List<string> names = new List<string>();
+            for(int i = 0; i < ds.Tables[0].Rows.Count;i++)
+            {
+                names.Add(ds.Tables[0].Rows[i][0].ToString());
+            }
+            return names;
+        }
+
+        public List<string> approvedTeacher(int ogrenciId) {
+
+            string sorgu = "select ad from hoca where id IN (select hocaid from ogrenciders where durum='onaylandi' and ogrenciid="+ogrenciId+") ";
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            List<string> names = new List<string>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                names.Add(ds.Tables[0].Rows[i][0].ToString());
+            }
+            return names;
+        }
+
+        public string getInterestsName(int id)
+        {
+            string sorgu = "select ad from ilgialani where id="+id+"";
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            string name = ds.Tables[0].Rows[0][0].ToString();
+
+            return name;
+        }
+
+        public List<int> getAllInterestId(int teacherId)
+        {
+            string sorgu = "select id from ilgialani except (select ilgialaniid from ilgialanihoca where hocaid="+teacherId+")";
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            List<int> interest = new List<int>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                interest.Add(int.Parse(ds.Tables[0].Rows[i][0].ToString()));
+            }
+            return interest;
+        } 
+
+        public void setIntrestToTeacher(int id,int interestId,int teachId)
+        {
+            conn.Close();
+            conn.Open();
+            NpgsqlCommand komut = new NpgsqlCommand("insert into ilgialanihoca (id,ilgialaniid,hocaid) values (@p1, @p2,@p3)", conn);
+            komut.Parameters.AddWithValue("@p1", id);
+            komut.Parameters.AddWithValue("@p2", interestId);
+            komut.Parameters.AddWithValue("@p3", teachId);
+            komut.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public List<int> getTeachsInterest(int teachId)
+        {
+            string sorgu = "select ilgialaniid from ilgialanihoca where hocaid="+teachId+"";
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            List<int> interest = new List<int>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                interest.Add(int.Parse(ds.Tables[0].Rows[i][0].ToString()));
+            }
+            return interest;
+        }
+
+        public void deleteInterest(int teacherId,int ilgialaniID)
+        {
+            conn.Close();
+            conn.Open();
+            NpgsqlCommand komut = new NpgsqlCommand("Delete from ilgialanihoca where ilgialaniid="+ilgialaniID+" and hocaid="+teacherId+"", conn);
+            komut.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public List<int> getTeachersCourse(int teachId)
+        {
+            string sorgu = "select dersid from hocaders where hocaid=" + teachId + "";
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            List<int> courses = new List<int>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                courses.Add(int.Parse(ds.Tables[0].Rows[i][0].ToString()));
+            }
+            return courses;
+        }
+
+        public List<int> getNotCorfirmedStudent(int teacherId,int dersId)
+        {
+
+            string sorgu = "select id from ogrenci except(select ogrenciid from ogrenciders where dersid="+dersId+")";
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sorgu, conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            List<int> courses = new List<int>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                courses.Add(int.Parse(ds.Tables[0].Rows[i][0].ToString()));
+            }
+            return courses;
+        }
 
 
     }
