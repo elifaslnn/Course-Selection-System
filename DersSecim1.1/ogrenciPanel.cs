@@ -59,7 +59,8 @@ namespace DersSecim1._1
             selectCoursesPanel.Visible = false;
             infoCourses.Visible = false;
             messagePanel.Visible = false;
-            approvePanel.Visible = false;   
+            approvePanel.Visible = false;
+            panel4.Visible = false;
         }
 
         List<List<CheckBox>> checkBoxes = new List<List<CheckBox>>();
@@ -212,7 +213,7 @@ namespace DersSecim1._1
         private void takedCourses_Click(object sender, EventArgs e)
         {
             approvePanel.Visible = false;
-
+            panel4.Visible = false; 
             infoCourses.Visible = true;
             selectCoursesPanel.Visible = false;
             infoOfTakedCourses();
@@ -227,7 +228,8 @@ namespace DersSecim1._1
              removeControls();
              infoCourses.Visible = false;
              selectCoursesPanel.Visible = true;
-             approvePanel.Visible = false;   
+             approvePanel.Visible = false;
+             panel4.Visible = false;
              createCheckBoxesforTeachers();
              createLabelforCourses();
              requestCourses();
@@ -385,6 +387,9 @@ namespace DersSecim1._1
         {
             //removeControls();
             approvePanel.Visible = true;
+            infoCourses.Visible = false;
+            selectCoursesPanel.Visible = true;
+            panel4.Visible = false;
             approvedCourses = queries.approvedCourses(ogrenciId);
             approvedTeacher=queries.approvedTeacher(ogrenciId);
             int y = 80;
@@ -401,6 +406,23 @@ namespace DersSecim1._1
             }
         }
 
-
+        //HOCALARDAN GELEN TALEPLERİ GÖSTER
+        List<List<int>> teachersRequestId= new List<List<int>>();//0=dersid, 1=hocaid
+        List<Label> requestInfo= new List<Label>(); 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            infoCourses.Visible = false;
+            selectCoursesPanel.Visible = false;
+            approvePanel.Visible = false;
+            panel4.Visible = true;
+            teachersRequestId = queries.getTeachersRequestCourse(ogrenciId);
+            int y = 70;
+            for (int i = 0;i<teachersRequestId.Count;i++)
+            {
+                requestInfo.Add(new Label() {Text= queries.getNameofCoursesId( teachersRequestId[i][0])+"        " + queries.getTeacherNameForTeachId(teachersRequestId[i][1]), Location=new System.Drawing.Point(20,y)  });
+                panel4.Controls.Add(requestInfo[i]);
+                y += 40;
+            }
+        }
     }
 }
