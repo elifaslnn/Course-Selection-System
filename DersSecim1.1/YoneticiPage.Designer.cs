@@ -36,9 +36,9 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(1269, 0);
+            this.panel1.Location = new System.Drawing.Point(950, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(338, 807);
+            this.panel1.Size = new System.Drawing.Size(338, 710);
             this.panel1.TabIndex = 0;
             // 
             // panel2
@@ -47,14 +47,14 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1269, 128);
+            this.panel2.Size = new System.Drawing.Size(950, 128);
             this.panel2.TabIndex = 1;
             // 
             // YoneticiPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1607, 807);
+            this.ClientSize = new System.Drawing.Size(1288, 710);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "YoneticiPage";

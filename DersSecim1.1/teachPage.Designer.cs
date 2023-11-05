@@ -31,10 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(teachPage));
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.agno = new System.Windows.Forms.Label();
             this.NameSurname = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.settingBtn = new System.Windows.Forms.Button();
             this.filterBtn = new System.Windows.Forms.Button();
@@ -64,17 +62,15 @@
             this.selectCourse = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.filterPanel = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.resultPanel = new System.Windows.Forms.Panel();
             this.aktsPanel = new System.Windows.Forms.Panel();
             this.coursesPanel = new System.Windows.Forms.Panel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
             this.approvePanel.SuspendLayout();
             this.messagePanel.SuspendLayout();
@@ -90,7 +86,6 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.agno);
             this.panel1.Controls.Add(this.NameSurname);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -111,16 +106,6 @@
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
-            // agno
-            // 
-            this.agno.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.agno.AutoSize = true;
-            this.agno.Location = new System.Drawing.Point(131, 278);
-            this.agno.Name = "agno";
-            this.agno.Size = new System.Drawing.Size(44, 16);
-            this.agno.TabIndex = 7;
-            this.agno.Text = "label1";
-            // 
             // NameSurname
             // 
             this.NameSurname.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -135,22 +120,11 @@
             // 
             this.panel3.AutoScroll = true;
             this.panel3.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel3.Controls.Add(this.dataGridView1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(0, 329);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(338, 580);
             this.panel3.TabIndex = 4;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(38, 73);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(277, 467);
-            this.dataGridView1.TabIndex = 0;
             // 
             // panel2
             // 
@@ -452,6 +426,14 @@
             this.filterPanel.Size = new System.Drawing.Size(1164, 731);
             this.filterPanel.TabIndex = 4;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(990, 28);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(149, 24);
+            this.comboBox1.TabIndex = 0;
+            // 
             // button4
             // 
             this.button4.BackColor = System.Drawing.Color.CornflowerBlue;
@@ -512,14 +494,6 @@
             this.coursesPanel.Size = new System.Drawing.Size(327, 380);
             this.coursesPanel.TabIndex = 0;
             // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(990, 28);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(149, 24);
-            this.comboBox1.TabIndex = 0;
-            // 
             // teachPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -539,8 +513,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.approvePanel.ResumeLayout(false);
             this.approvePanel.PerformLayout();
@@ -571,7 +543,6 @@
         private System.Windows.Forms.Button ShowStudentBtn;
         private System.Windows.Forms.Button requestedCoursesBtn;
         private System.Windows.Forms.Panel approvePanel;
-        private System.Windows.Forms.Label agno;
         private System.Windows.Forms.Label NameSurname;
         private System.Windows.Forms.Panel infoPanel;
         private System.Windows.Forms.Label studentNameL;
@@ -590,7 +561,6 @@
         private System.Windows.Forms.Panel selectInterestPanel;
         private System.Windows.Forms.Panel showInterestPanel;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel RequestStudent;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox selectCourse;

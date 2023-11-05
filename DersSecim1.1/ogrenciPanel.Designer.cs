@@ -31,27 +31,22 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ogrenciPanel));
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.agno = new System.Windows.Forms.Label();
             this.NameSurname = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.traskriptButton = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.approveBtn = new System.Windows.Forms.Button();
             this.courseRequestBtn = new System.Windows.Forms.Button();
             this.takedCourses = new System.Windows.Forms.Button();
             this.infoCourses = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.selectCoursesPanel = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.panel7 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.courseSelection = new System.Windows.Forms.Panel();
+            this.ilgialanlariComboB = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.messagePanel = new System.Windows.Forms.Panel();
             this.ExitMsjBtn = new System.Windows.Forms.Button();
@@ -59,32 +54,39 @@
             this.messageTextBox = new System.Windows.Forms.TextBox();
             this.messageToLabel = new System.Windows.Forms.Label();
             this.messageFromLabel = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.approvePanel = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.transkriptPanel = new System.Windows.Forms.Panel();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.downTransk = new System.Windows.Forms.Button();
+            this.pdfDocumentViewer1 = new Spire.PdfViewer.Forms.PdfDocumentViewer();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
             this.infoCourses.SuspendLayout();
             this.selectCoursesPanel.SuspendLayout();
-            this.panel6.SuspendLayout();
             this.courseSelection.SuspendLayout();
             this.messagePanel.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.approvePanel.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.transkriptPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.agno);
             this.panel1.Controls.Add(this.NameSurname);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -95,33 +97,13 @@
             // 
             // panel2
             // 
+            this.panel2.AutoScroll = true;
             this.panel2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel2.Controls.Add(this.dataGridView1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 332);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(338, 580);
             this.panel2.TabIndex = 3;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 59);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(338, 289);
-            this.dataGridView1.TabIndex = 2;
-            // 
-            // agno
-            // 
-            this.agno.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.agno.AutoSize = true;
-            this.agno.Location = new System.Drawing.Point(131, 286);
-            this.agno.Name = "agno";
-            this.agno.Size = new System.Drawing.Size(44, 16);
-            this.agno.TabIndex = 2;
-            this.agno.Text = "label1";
             // 
             // NameSurname
             // 
@@ -129,9 +111,9 @@
             this.NameSurname.AutoSize = true;
             this.NameSurname.Location = new System.Drawing.Point(130, 261);
             this.NameSurname.Name = "NameSurname";
-            this.NameSurname.Size = new System.Drawing.Size(44, 16);
+            this.NameSurname.Size = new System.Drawing.Size(80, 16);
             this.NameSurname.TabIndex = 1;
-            this.NameSurname.Text = "label1";
+            this.NameSurname.Text = "isim soyisim";
             // 
             // pictureBox1
             // 
@@ -147,6 +129,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.traskriptButton);
             this.panel3.Controls.Add(this.button2);
             this.panel3.Controls.Add(this.approveBtn);
             this.panel3.Controls.Add(this.courseRequestBtn);
@@ -156,6 +139,26 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1437, 128);
             this.panel3.TabIndex = 1;
+            // 
+            // traskriptButton
+            // 
+            this.traskriptButton.Location = new System.Drawing.Point(12, 12);
+            this.traskriptButton.Name = "traskriptButton";
+            this.traskriptButton.Size = new System.Drawing.Size(321, 35);
+            this.traskriptButton.TabIndex = 2;
+            this.traskriptButton.Text = "Trankript Yükle";
+            this.traskriptButton.UseVisualStyleBackColor = true;
+            this.traskriptButton.Click += new System.EventHandler(this.traskriptButton_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1068, 63);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(321, 32);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "Hoca Ders Talepleri";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // approveBtn
             // 
@@ -193,7 +196,6 @@
             this.infoCourses.AutoScroll = true;
             this.infoCourses.BackColor = System.Drawing.Color.White;
             this.infoCourses.Controls.Add(this.label4);
-            this.infoCourses.Controls.Add(this.label3);
             this.infoCourses.Controls.Add(this.label2);
             this.infoCourses.Controls.Add(this.label1);
             this.infoCourses.Location = new System.Drawing.Point(176, 177);
@@ -212,22 +214,11 @@
             this.label4.Text = "Ders Adı";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Yu Gothic UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.Location = new System.Drawing.Point(295, 47);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 31);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "AKTS";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Yu Gothic UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(374, 47);
+            this.label2.Location = new System.Drawing.Point(314, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 31);
             this.label2.TabIndex = 1;
@@ -248,66 +239,18 @@
             // selectCoursesPanel
             // 
             this.selectCoursesPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.selectCoursesPanel.BackColor = System.Drawing.Color.RosyBrown;
-            this.selectCoursesPanel.Controls.Add(this.panel6);
+            this.selectCoursesPanel.BackColor = System.Drawing.Color.Transparent;
             this.selectCoursesPanel.Controls.Add(this.button1);
             this.selectCoursesPanel.Controls.Add(this.courseSelection);
+            this.selectCoursesPanel.Controls.Add(this.panel6);
             this.selectCoursesPanel.Location = new System.Drawing.Point(176, 177);
             this.selectCoursesPanel.Name = "selectCoursesPanel";
             this.selectCoursesPanel.Size = new System.Drawing.Size(1124, 711);
             this.selectCoursesPanel.TabIndex = 3;
             // 
-            // panel6
-            // 
-            this.panel6.AutoScroll = true;
-            this.panel6.BackColor = System.Drawing.Color.Silver;
-            this.panel6.Controls.Add(this.label8);
-            this.panel6.Controls.Add(this.label7);
-            this.panel6.Controls.Add(this.label6);
-            this.panel6.Controls.Add(this.panel7);
-            this.panel6.Location = new System.Drawing.Point(649, 0);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(475, 711);
-            this.panel6.TabIndex = 2;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(147, 48);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(63, 16);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "Hoca Adı";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(11, 48);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(59, 16);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Ders Adı";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(11, 10);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(113, 16);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Güncel Taleplerin";
-            // 
-            // panel7
-            // 
-            this.panel7.Location = new System.Drawing.Point(579, 38);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(542, 630);
-            this.panel7.TabIndex = 1;
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(399, 638);
+            this.button1.Location = new System.Drawing.Point(510, 662);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -319,12 +262,22 @@
             // 
             this.courseSelection.AutoScroll = true;
             this.courseSelection.BackColor = System.Drawing.Color.White;
+            this.courseSelection.Controls.Add(this.ilgialanlariComboB);
             this.courseSelection.Controls.Add(this.label5);
             this.courseSelection.Controls.Add(this.messagePanel);
             this.courseSelection.Location = new System.Drawing.Point(0, 0);
             this.courseSelection.Name = "courseSelection";
             this.courseSelection.Size = new System.Drawing.Size(654, 632);
             this.courseSelection.TabIndex = 0;
+            // 
+            // ilgialanlariComboB
+            // 
+            this.ilgialanlariComboB.FormattingEnabled = true;
+            this.ilgialanlariComboB.Location = new System.Drawing.Point(512, 10);
+            this.ilgialanlariComboB.Name = "ilgialanlariComboB";
+            this.ilgialanlariComboB.Size = new System.Drawing.Size(121, 24);
+            this.ilgialanlariComboB.TabIndex = 5;
+            this.ilgialanlariComboB.SelectedIndexChanged += new System.EventHandler(this.ilgialanlariComboB_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -398,6 +351,54 @@
             this.messageFromLabel.TabIndex = 0;
             this.messageFromLabel.Text = "Gönderen:";
             // 
+            // panel6
+            // 
+            this.panel6.AutoScroll = true;
+            this.panel6.BackColor = System.Drawing.Color.Silver;
+            this.panel6.Controls.Add(this.label8);
+            this.panel6.Controls.Add(this.label7);
+            this.panel6.Controls.Add(this.label6);
+            this.panel6.Controls.Add(this.panel7);
+            this.panel6.Location = new System.Drawing.Point(649, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(475, 711);
+            this.panel6.TabIndex = 2;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(147, 48);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(63, 16);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Hoca Adı";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(11, 48);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(59, 16);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Ders Adı";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(11, 10);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(113, 16);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Güncel Taleplerin";
+            // 
+            // panel7
+            // 
+            this.panel7.Location = new System.Drawing.Point(579, 38);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(542, 630);
+            this.panel7.TabIndex = 1;
+            // 
             // approvePanel
             // 
             this.approvePanel.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -427,16 +428,6 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "Ders Adı";
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(1068, 63);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(321, 32);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Hoca Ders Talepleri";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.White;
@@ -447,15 +438,6 @@
             this.panel4.Size = new System.Drawing.Size(1124, 723);
             this.panel4.TabIndex = 2;
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(51, 38);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(59, 16);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "Ders Adı";
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -465,41 +447,108 @@
             this.label12.TabIndex = 1;
             this.label12.Text = "Hoca Adı";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(51, 38);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(59, 16);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Ders Adı";
+            // 
+            // transkriptPanel
+            // 
+            this.transkriptPanel.BackColor = System.Drawing.Color.White;
+            this.transkriptPanel.Controls.Add(this.richTextBox1);
+            this.transkriptPanel.Controls.Add(this.button4);
+            this.transkriptPanel.Controls.Add(this.downTransk);
+            this.transkriptPanel.Controls.Add(this.pdfDocumentViewer1);
+            this.transkriptPanel.Location = new System.Drawing.Point(176, 177);
+            this.transkriptPanel.Name = "transkriptPanel";
+            this.transkriptPanel.Size = new System.Drawing.Size(1246, 720);
+            this.transkriptPanel.TabIndex = 2;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(512, 29);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(731, 562);
+            this.richTextBox1.TabIndex = 8;
+            this.richTextBox1.Text = "";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(320, 606);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(186, 67);
+            this.button4.TabIndex = 7;
+            this.button4.Text = "button4";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // downTransk
+            // 
+            this.downTransk.Location = new System.Drawing.Point(115, 606);
+            this.downTransk.Name = "downTransk";
+            this.downTransk.Size = new System.Drawing.Size(186, 67);
+            this.downTransk.TabIndex = 6;
+            this.downTransk.Text = "Transkript Yükle";
+            this.downTransk.UseVisualStyleBackColor = true;
+            this.downTransk.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // pdfDocumentViewer1
+            // 
+            this.pdfDocumentViewer1.AutoScroll = true;
+            this.pdfDocumentViewer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
+            this.pdfDocumentViewer1.FormFillEnabled = false;
+            this.pdfDocumentViewer1.Location = new System.Drawing.Point(35, 29);
+            this.pdfDocumentViewer1.MultiPagesThreshold = 60;
+            this.pdfDocumentViewer1.Name = "pdfDocumentViewer1";
+            this.pdfDocumentViewer1.OnRenderPageExceptionEvent = null;
+            this.pdfDocumentViewer1.PageLayoutMode = Spire.PdfViewer.Forms.PageLayoutMode.SinglePageContinuous;
+            this.pdfDocumentViewer1.Size = new System.Drawing.Size(471, 562);
+            this.pdfDocumentViewer1.TabIndex = 5;
+            this.pdfDocumentViewer1.Text = "pdfDocumentViewer1";
+            this.pdfDocumentViewer1.Threshold = 60;
+            this.pdfDocumentViewer1.ViewerMode = Spire.PdfViewer.Forms.PdfViewerMode.PdfViewerMode.MultiPage;
+            this.pdfDocumentViewer1.ZoomFactor = 1F;
+            this.pdfDocumentViewer1.ZoomMode = Spire.PdfViewer.Forms.ZoomMode.Default;
+            // 
             // ogrenciPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(1775, 912);
-            this.Controls.Add(this.panel4);
-            this.Controls.Add(this.approvePanel);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.selectCoursesPanel);
             this.Controls.Add(this.infoCourses);
+            this.Controls.Add(this.transkriptPanel);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.approvePanel);
             this.Name = "ogrenciPanel";
             this.Text = "ogrenciPanel";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ogrenciPanel_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel3.ResumeLayout(false);
             this.infoCourses.ResumeLayout(false);
             this.infoCourses.PerformLayout();
             this.selectCoursesPanel.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             this.courseSelection.ResumeLayout(false);
             this.courseSelection.PerformLayout();
             this.messagePanel.ResumeLayout(false);
             this.messagePanel.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.approvePanel.ResumeLayout(false);
             this.approvePanel.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.transkriptPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -509,14 +558,12 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label agno;
         private System.Windows.Forms.Label NameSurname;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button courseRequestBtn;
         private System.Windows.Forms.Button takedCourses;
         private System.Windows.Forms.Panel infoCourses;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel selectCoursesPanel;
@@ -538,10 +585,16 @@
         private System.Windows.Forms.Panel approvePanel;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button traskriptButton;
+        private System.Windows.Forms.Panel transkriptPanel;
+        private System.Windows.Forms.Button downTransk;
+        private Spire.PdfViewer.Forms.PdfDocumentViewer pdfDocumentViewer1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.ComboBox ilgialanlariComboB;
     }
 }

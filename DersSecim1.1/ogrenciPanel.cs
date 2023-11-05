@@ -11,11 +11,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using IronOcr;
+using IronOcr.Assets;
+using System.Runtime.ExceptionServices;
+using Spire.Pdf.Exporting.XPS.Schema;
 
 namespace DersSecim1._1
 {
     public partial class ogrenciPanel : Form
     {
+      
 
         public int ogrenciId;
         query queries = new query();
@@ -28,10 +33,13 @@ namespace DersSecim1._1
         public ogrenciPanel()
         {
             InitializeComponent();
+            //var Ocr = new AutoOcr();
         }
 
+        List<int> interestsId= new List<int>(); 
         private void ogrenciPanel_Load(object sender, EventArgs e)
         {
+            
             System.Drawing.Drawing2D.GraphicsPath obj=new System.Drawing.Drawing2D.GraphicsPath();
             obj.AddEllipse(0, 0,pictureBox1.Width,pictureBox1.Height);
             Region rg=new Region(obj);
@@ -50,8 +58,7 @@ namespace DersSecim1._1
             }
             label1.Location = Location = new System.Drawing.Point(48, 47);
             label2.Location = Location = new System.Drawing.Point(181, 47);
-            label3.Location = Location = new System.Drawing.Point(295, 47);
-            label4.Location = Location = new System.Drawing.Point(374, 47);
+            label4.Location = Location = new System.Drawing.Point(295, 47);
 
             ////////////////////////
 
@@ -61,6 +68,35 @@ namespace DersSecim1._1
             messagePanel.Visible = false;
             approvePanel.Visible = false;
             panel4.Visible = false;
+            transkriptPanel.Visible = false;
+
+            interestsId=queries.getInterest();
+
+
+            NameSurname.Text = queries.getNameSurname(ogrenciId);
+
+            for (int i=0;i<interestsId.Count;i++)
+            {
+                ilgialanlariComboB.Items.Add(queries.getInterestsName(interestsId[i]));
+            }
+
+            if (queries.getStudentsMessages(ogrenciId).Count != 0)
+            {
+                List<Label> messagesLabel = new List<Label>();
+                List<int> messages = new List<int>();
+                messages = queries.getStudentsMessages(ogrenciId);//mesajların idsi
+                int y = 0;
+                for (int i = 0; i < messages.Count; i++)
+                {
+                    messagesLabel.Add(new Label() { Text = "Gönderen:" + queries.getTeacherNameForTeachId(queries.senderTeachId(messages[i])) + "\n\n" + queries.getmessages(messages[i]), Location = new System.Drawing.Point(0, y), BorderStyle = BorderStyle.FixedSingle, Size = new System.Drawing.Size(338, 100) }); ;
+                    panel2.Controls.Add(messagesLabel[i]);
+                    y += 100;
+                }
+            }
+
+
+
+
         }
 
         List<List<CheckBox>> checkBoxes = new List<List<CheckBox>>();
@@ -106,7 +142,7 @@ namespace DersSecim1._1
             int y = 50;
             for (int i = 0; i < teachersAllId.Count; i++)
             {
-                int x = 120;
+                int x = 230;
                 List<CheckBox> cbox = new List<CheckBox>();
                 List<Button> buttons = new List<Button>();
 
@@ -116,7 +152,7 @@ namespace DersSecim1._1
                         x += 90;
                         buttons.Add(new Button() { Text = "**", Location = new System.Drawing.Point(x, y), Size = new System.Drawing.Size(30, 30), BackColor = Color.Green });
                         
-                    x += 40;
+                    x += 100;
                     }
                     checkBoxes.Add(cbox);
                     messagesBtn.Add(buttons);
@@ -148,7 +184,7 @@ namespace DersSecim1._1
             {
                 if (checkBoxes[studentsCoursesNamecanTake.IndexOf(courseName)].Count != 0)
                 {
-                    courses.Add(new Label() { Text = courseName, Location = new System.Drawing.Point(10, y) });
+                    courses.Add(new Label() { Text = courseName, Location = new System.Drawing.Point(10, y), Size=new System.Drawing.Size(200,40) });
                     y += 40;
                 }
             }
@@ -168,13 +204,11 @@ namespace DersSecim1._1
             foreach (var course in coursesName)
             {
                 int coursesId = queries.getCourseIdForCoursesName(course);
-                int note = queries.getNoteofCourseForOgrenciIdandCourseId(ogrenciId, coursesId);
+                string note = queries.getNoteofCourseForOgrenciIdandCourseId(ogrenciId, coursesId);
                 string code = queries.getCoursesCode(coursesId);
-                int akts = queries.getCoursesAkts(coursesId);
-                infoCourses.Controls.Add(new Label() { Text = coursesName[coursesName.IndexOf(course)], Location = new System.Drawing.Point(181, y) });//aldığı derslerin adınu tutacak labelların oluşturulması
-                infoCourses.Controls.Add(new Label() { Text = note.ToString(), Location = new System.Drawing.Point(374, y) });//aldığı derslerin notunu tutacak labelların oluşturulması
+                infoCourses.Controls.Add(new Label() { Text = coursesName[coursesName.IndexOf(course)], Location = new System.Drawing.Point(295, y) ,Size =new System.Drawing.Size(400,40)});//aldığı derslerin adınu tutacak labelların oluşturulması
+                infoCourses.Controls.Add(new Label() { Text = note, Location = new System.Drawing.Point(181, y) });//aldığı derslerin notunu tutacak labelların oluşturulması
                 infoCourses.Controls.Add(new Label() { Text = code, Location = new System.Drawing.Point(48, y) });//aldığı derslerin notunu tutacak labelların oluşturulması
-                infoCourses.Controls.Add(new Label() { Text = akts.ToString(), Location = new System.Drawing.Point(295, y) });//aldığı derslerin notunu tutacak labelların oluşturulması
                 y += 40;
             }
         }
@@ -216,6 +250,7 @@ namespace DersSecim1._1
             panel4.Visible = false; 
             infoCourses.Visible = true;
             selectCoursesPanel.Visible = false;
+            transkriptPanel.Visible = false;    
             infoOfTakedCourses();
         }
 
@@ -226,10 +261,12 @@ namespace DersSecim1._1
         private void courseRequestBtn_Click(object sender, EventArgs e)
         {
              removeControls();
+             removeilgialaniFilter();
              infoCourses.Visible = false;
              selectCoursesPanel.Visible = true;
              approvePanel.Visible = false;
              panel4.Visible = false;
+             transkriptPanel.Visible = false;
              createCheckBoxesforTeachers();
              createLabelforCourses();
              requestCourses();
@@ -238,8 +275,6 @@ namespace DersSecim1._1
         }
         private void requestPanel()
         {
-            infoCourses.Visible = false;
-            selectCoursesPanel.Visible = true;
             createCheckBoxesforTeachers();
             createLabelforCourses();
             requestCourses();
@@ -298,6 +333,7 @@ namespace DersSecim1._1
             requestCoursesTeacher.Clear();
             deleteRequestBtn.Clear();
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -388,8 +424,10 @@ namespace DersSecim1._1
             //removeControls();
             approvePanel.Visible = true;
             infoCourses.Visible = false;
-            selectCoursesPanel.Visible = true;
+            selectCoursesPanel.Visible = false;
             panel4.Visible = false;
+            transkriptPanel.Visible = false;
+            
             approvedCourses = queries.approvedCourses(ogrenciId);
             approvedTeacher=queries.approvedTeacher(ogrenciId);
             int y = 80;
@@ -409,20 +447,182 @@ namespace DersSecim1._1
         //HOCALARDAN GELEN TALEPLERİ GÖSTER
         List<List<int>> teachersRequestId= new List<List<int>>();//0=dersid, 1=hocaid
         List<Label> requestInfo= new List<Label>(); 
+        List<Button> approveBtns= new List<Button>();
         private void button2_Click(object sender, EventArgs e)
         {
             infoCourses.Visible = false;
             selectCoursesPanel.Visible = false;
             approvePanel.Visible = false;
             panel4.Visible = true;
+            transkriptPanel.Visible = false;
+            button2Event();
+
+        }
+
+        private void button2Event()
+        {
             teachersRequestId = queries.getTeachersRequestCourse(ogrenciId);
             int y = 70;
-            for (int i = 0;i<teachersRequestId.Count;i++)
+            for (int i = 0; i < teachersRequestId.Count; i++)
             {
-                requestInfo.Add(new Label() {Text= queries.getNameofCoursesId( teachersRequestId[i][0])+"        " + queries.getTeacherNameForTeachId(teachersRequestId[i][1]), Location=new System.Drawing.Point(20,y)  });
+                requestInfo.Add(new Label() { Text = queries.getNameofCoursesId(teachersRequestId[i][0]) + "        " + queries.getTeacherNameForTeachId(teachersRequestId[i][1]), Location = new System.Drawing.Point(20, y), Size = new System.Drawing.Size(700, 40) });
+                approveBtns.Add(new Button() { Text = "Onayla", Location = new System.Drawing.Point(730, y), BackColor = Color.CornflowerBlue });
+                approveBtns[i].Click += new System.EventHandler(studentApproveCourseBtn_click);
                 panel4.Controls.Add(requestInfo[i]);
+                panel4.Controls.Add(approveBtns[i]);
                 y += 40;
             }
+        }
+
+        private void studentApproveCourseBtn_click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;//
+            int index= approveBtns.IndexOf(button);
+            int id = queries.getLastIdFromTable("ogrenciders") + 1;
+            queries.acceptStudentsRequest(id, teachersRequestId[index][0], ogrenciId, "onaylandı", teachersRequestId[index][1]);
+            queries.deleteRequestTeacher(ogrenciId, teachersRequestId[index][0], teachersRequestId[index][1]);
+            removeRequestTeacher();
+            button2Event();
+        }
+
+        private void removeRequestTeacher()
+        {
+
+            for(int i = 0; i < teachersRequestId.Count; i++)
+            {
+                panel4.Controls.Remove(requestInfo[i]);
+                panel4.Controls.Remove(approveBtns[i]);
+            }
+            teachersRequestId.Clear();
+            requestInfo.Clear();
+            approveBtns.Clear();
+        }
+
+        private void traskriptButton_Click(object sender, EventArgs e)
+        {
+            transkriptPanel.Visible = true;
+            selectCoursesPanel.Visible = false;
+            infoCourses.Visible = false;
+            messagePanel.Visible = false;
+            approvePanel.Visible = false;
+            panel4.Visible = false;
+        }
+
+        string path;
+        private void button3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "pdf files|*.pdf";
+            if(openFileDialog.ShowDialog()==System.Windows.Forms.DialogResult.OK)
+            {
+                path = openFileDialog.FileName;
+                pdfDocumentViewer1.LoadFromFile(path);
+            }
+        }
+        
+       
+        private void button4_Click(object sender, EventArgs e)
+        {
+            List<string> allLinesList = new List<string>();
+            var ocr = new AutoOcr();
+            var result = ocr.ReadPdf(path);
+            string [] allLines= result.Text.Split('\n');
+
+            
+            foreach(string lines in allLines)
+            {
+                var random = new Random();
+
+                //ders TABLOSUNA EKLEME
+                string coursesCode =lines.Split(' ')[0];//bunun last ındexini al
+                int idDers = queries.getLastIdFromTable("ders")+1;
+                int idOgrenciDers = queries.getLastIdFromTable("ogrenciders") + 1;
+                string ad;
+                int hocaId = random.Next(1, 4);
+                string not;
+
+                int startIndex =lines.LastIndexOf(coursesCode);
+                int finishIndex=lines.IndexOf("Z Tr");
+
+
+                if (coursesCode.Length== 6 && int.TryParse(coursesCode.Substring(coursesCode.Length - 3),out int res))
+                {
+                    if (finishIndex > 0)
+                    {
+                        ad = lines.Substring(6, finishIndex - 7);
+                        not = lines.Substring(finishIndex + 13, 2);
+                        richTextBox1.Text += not+"\n";
+                        //queries.setTranskriptInfoCourses(idDers, ad, coursesCode);
+                        try
+                        {
+                            queries.setTranskriptInfoOgrenciDers(idOgrenciDers, queries.getCourseIdForCoursesName(ad), ogrenciId, "aldı", not, hocaId);
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+                          
+                    }
+                }
+            }
+
+        }
+
+        List<int> teachersInterest = new List<int>();
+        List<int> teachersCourses = new List<int>();
+        List<int> studentTakedCourses = new List<int>();
+        List<Label> teachersLabel = new List<Label>();
+        List<Label> teachersCourseLabel = new List<Label>();
+        private void ilgialanlariComboB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            removeControls();
+            removeilgialaniFilter();
+
+            int index = ilgialanlariComboB.SelectedIndex+1;
+            teachersInterest = queries.getTeacherIdforInterest(index);// bu ilgi alanındaki hocalar
+            for (int i = 0; i < teachersInterest.Count; i++)
+            {
+                teachersCourses = queries.getTeachersCourse(teachersInterest[i]);// bu hocaların dersleri
+            }
+            studentTakedCourses = queries.getStudentsTakedCoursesId(ogrenciId);// bu öğrencinnin aldığı dersler   
+
+            int y = 60;
+            for(int i = 0; i < teachersInterest.Count; i++)
+            {
+                teachersLabel.Add(new Label() { Text = queries.getTeacherNameForTeachId(teachersInterest[i]), Location = new System.Drawing.Point(20, y) });
+                teachersCourses = queries.getTeachersCourse(teachersInterest[i]);// bu hocaların dersleri
+                List<int> demo= teachersCourses.Except(studentTakedCourses).ToList();
+                courseSelection.Controls.Add(teachersLabel[i]);
+                int x = 140;
+                for(int  j = 0; j < demo.Count; j++)
+                {
+                    teachersCourseLabel.Add(new Label() { Text = queries.getNameofCoursesId(demo[j]), Location = new System.Drawing.Point(x, y) });
+                    x += 140;
+                    courseSelection.Controls.Add(teachersCourseLabel[i]);
+                }
+
+                y += 40;
+            }
+
+        }
+
+        private void removeilgialaniFilter()
+        {
+
+            for(int i = 0; i < teachersLabel.Count; i++)
+            {
+                courseSelection.Controls.Remove(teachersLabel[i]);
+            }
+            for (int i = 0; i < teachersCourseLabel.Count; i++)
+            {
+                courseSelection.Controls.Remove(teachersCourseLabel[i]);
+            }
+            teachersInterest.Clear();
+            teachersCourses.Clear();
+            studentTakedCourses.Clear();
+            teachersLabel.Clear();
+            teachersCourseLabel.Clear();
+
         }
     }
 }

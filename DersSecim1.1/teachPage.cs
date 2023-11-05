@@ -51,6 +51,25 @@ namespace DersSecim1._1
             interestPanel.Visible = false;
             RequestStudent.Visible = false;
             filterPanel.Visible = false;
+
+            NameSurname.Text=queries.getTeacherNameForTeachId(teachId);
+
+            //MESAJLARI GÖSTER
+
+            List<Label> messagesLabel = new List<Label>();
+            List<int> messages = new List<int>();
+            if (queries.getTeachsMessages(teachId).Count != 0)
+            {
+                messages = queries.getTeachsMessages(teachId);//mesajların idsi
+                int y = 0;
+                for (int i = 0; i < messages.Count; i++)
+                {
+                    messagesLabel.Add(new Label() { Text = "Gönderen:" + queries.getNameSurname(queries.senderStudentId(messages[i])) + "\n\n" + queries.getmessagesStudent(messages[i]), Location = new System.Drawing.Point(0, y), BorderStyle = BorderStyle.FixedSingle, Size = new System.Drawing.Size(338, 100) }); ;
+                    panel3.Controls.Add(messagesLabel[i]);
+                    y += 100;
+                }
+            }
+
         }
 
         List<List<int>> studentRequestInfo = new List<List<int>>();
@@ -478,7 +497,7 @@ namespace DersSecim1._1
         List<int> akts= new List<int>();
         List<Label> students= new List<Label>();    
         List<int> studentsId= new List<int>();  
-        List<int> averageNot= new List<int>();
+        List<double> averageNot= new List<double>();
         List<Button> requestToStudent= new List<Button>();  
 
         private void button4_Click(object sender, EventArgs e)
@@ -523,40 +542,44 @@ namespace DersSecim1._1
 
                 }
 
-                int max = averageNot[0];
-                for(int i=0;i<averageNot.Count;i++)
+                double max;
+                if (averageNot.Count != 0)
                 {
-                    for(int j = i; j < averageNot.Count; j++)
+                    max=averageNot[0];
+                    for (int i = 0; i < averageNot.Count; i++)
                     {
-                        int temp;
-                        int temp2;
-                        if (averageNot[i]< averageNot[j])
+                        for (int j = i; j < averageNot.Count; j++)
                         {
-                            temp = averageNot[i];
-                            averageNot[i] = averageNot[j];
-                            averageNot[j] = temp;
+                            double temp;
+                            int temp2;
+                            if (averageNot[i] < averageNot[j])
+                            {
+                                temp = averageNot[i];
+                                averageNot[i] = averageNot[j];
+                                averageNot[j] = temp;
 
-                            temp2 = studentsId[i];
-                            studentsId[i] =studentsId[j];
-                            studentsId[j]= temp2;   
+                                temp2 = studentsId[i];
+                                studentsId[i] = studentsId[j];
+                                studentsId[j] = temp2;
 
+                            }
                         }
+                    }
+                    int y = 20;
+                    for (int i = 0; i < studentsId.Count; i++)// labelları yerleştir
+                    {
+                        bool checkStudent = true;
+                        //checkStudent = queries.checkStudentTakeCourses();
+                        //if ()
+                        students.Add(new Label() { Text = queries.getNameSurname(studentsId[i]) + "      Not:" + averageNot[i], Location = new System.Drawing.Point(20, y), Size = new System.Drawing.Size(350, 40) });
+                        requestToStudent.Add(new Button() { Text = "Talep", Location = new System.Drawing.Point(370, y) });
+                        resultPanel.Controls.Add(students[i]);
+                        requestToStudent[i].Click += new System.EventHandler(requestToStudent_click);
+                        resultPanel.Controls.Add(requestToStudent[i]);
+                        y += 40;
                     }
                 }
 
-                int y = 20;
-                for (int i=0;i<studentsId.Count ;i++)// labelları yerleştir
-                {
-                    bool checkStudent = true;
-                    //checkStudent = queries.checkStudentTakeCourses();
-                    //if ()
-                    students.Add(new Label() { Text = queries.getNameSurname(studentsId[i]) + "      Not:" + averageNot[i], Location = new System.Drawing.Point(20, y), Size = new System.Drawing.Size(350, 40) });
-                    requestToStudent.Add(new Button() {Text="Talep", Location = new System.Drawing.Point(370, y) });
-                    resultPanel.Controls.Add(students[i]);
-                    requestToStudent[i].Click += new System.EventHandler(requestToStudent_click); 
-                    resultPanel.Controls.Add(requestToStudent[i]);
-                    y += 40;
-                }
             }
 
         }
@@ -567,11 +590,13 @@ namespace DersSecim1._1
             Button clikkedButton= (Button)sender;
             int index= comboBox1.SelectedIndex;
             int id = queries.getLastIdFromTable("hocatalep")+1;
+            //label4.Text = studentsId[requestToStudent.IndexOf(clikkedButton)].ToString();
             bool check = queries.checkTeachsRequest(studentsId[requestToStudent.IndexOf(clikkedButton)], coursesId[index],teachId);
-            bool checkStudent = queries.checkStudentTakeCourses(coursesId[index]);
+            bool checkStudent = queries.checkStudentTakeCourses(coursesId[index], studentsId[requestToStudent.IndexOf(clikkedButton)]);
             if (check == true && checkStudent==true)
             {
                 queries.setRequestCourse(id, studentsId[requestToStudent.IndexOf(clikkedButton)], teachId, coursesId[index]);
+                MessageBox.Show("talep gönderildi");
             }
             else if(check== false)
             {
@@ -579,11 +604,10 @@ namespace DersSecim1._1
             }
             else if(checkStudent == false)
             {
-                MessageBox.Show("daha önce bu öğrenciye talepte bulundunuz!");
+                MessageBox.Show("bu öğrenci daha önce bu dersi almış!");
             }
 
         }
-
 
     }
 }
